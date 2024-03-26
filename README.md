@@ -16,7 +16,7 @@ Repository deploying and AKS or EKS cluster on demand, installing ArgoCD or Flux
 
 - [ ] AKS or EKS deployment trough terraform cli tool and HCL files. 
 - [ ] ArgoCD or Flux installations on deployed k8s cluster
-- [ ] CD wofklow for on demand deployments or destruction of k8s clusters (Options: AKS or EKS) and installation of GitOps tools (Options: ArgoCD or Flux) trough Github `workflow_dispatch` trigger
+- [ ] CD wofklow for on demand deployments of k8s clusters (Options: AKS or EKS) and installation of GitOps tools (Options: ArgoCD or Flux) trough Github `workflow_dispatch` trigger or destruction of k8s clusters
 
 ## Getting started
 
