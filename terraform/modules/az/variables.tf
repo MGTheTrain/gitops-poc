@@ -1,6 +1,5 @@
-# Azure Rg
 variable "digital_product_affix" {
-  default     = "dfgaws"
+  default     = "gitopsftw"
   description = "The digital product affix."
   type        = string
 }
@@ -39,7 +38,7 @@ variable "location" {
 }
 
 variable "team" {
-  default     = "Digital Foundation"
+  default     = "MG Innovators"
   description = "The team used for tagging resource groups and resources."
   type        = string
 }
