@@ -1,0 +1,1 @@
+# Azure Storage Account for tf state files
