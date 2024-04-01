@@ -105,10 +105,10 @@ jobs:
       - name: Install helm charts
         shell: bash
         run: |
-          eport TF_VAR_acr_username=${{ secrets.ACR_USERNAME }} 
-          eport TF_VAR_acr_password=${{ secrets.ACR_PASSWORD }}
-          eport TF_VAR_acr_login_server_name=${{ secrets.ACR_LOGIN_SERVER_NAME }}
-          eport TF_VAR_gitops_tool=${{ github.event.inputs.GITOPS_TOOL }}
+          export TF_VAR_acr_username=${{ secrets.ACR_USERNAME }} 
+          export TF_VAR_acr_password=${{ secrets.ACR_PASSWORD }}
+          export TF_VAR_acr_login_server_name=${{ secrets.ACR_LOGIN_SERVER_NAME }}
+          export TF_VAR_gitops_tool=${{ github.event.inputs.GITOPS_TOOL }}
           terraform apply --auto-approve
         continue-on-error: false
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
