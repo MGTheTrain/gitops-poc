@@ -30,7 +30,7 @@ variable "team" {
 
 variable "virtual_network_address_space" {
   type        = list(string)
-  default     = ["10.1.0.0/16"] 
+  default     = ["10.1.0.0/16"]
   description = "The virtual network address space. E.g. 2^(32-16)=65536 private ips in Vnet."
 }
 

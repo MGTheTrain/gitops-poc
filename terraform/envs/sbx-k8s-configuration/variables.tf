@@ -12,19 +12,19 @@ variable "k8s_namespace" {
 
 variable "acr_login_server_name" {
   default     = "TBD"
-  sensitive = true
+  sensitive   = true
   description = "Sets an ACR registry server name."
 }
 
 variable "acr_username" {
   default     = "TBD"
-  sensitive = true
+  sensitive   = true
   description = "Sets an ACR user name."
 }
 
 variable "acr_password" {
   default     = "TBD"
-  sensitive = true
+  sensitive   = true
   description = "Sets an ACR password."
 }
 

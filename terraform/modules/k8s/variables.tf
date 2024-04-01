@@ -17,19 +17,19 @@ variable "k8s_namespace" {
 
 variable "acr_login_server_name" {
   default     = "TBD"
-  sensitive = true
+  sensitive   = true
   description = "Sets an ACR registry server name."
 }
 
 variable "acr_username" {
   default     = "TBD"
-  sensitive = true
+  sensitive   = true
   description = "Sets an ACR user name."
 }
 
 variable "acr_password" {
   default     = "TBD"
-  sensitive = true
+  sensitive   = true
   description = "Sets an ACR password."
 }
 
@@ -39,7 +39,7 @@ variable "gitops_tool" {
   default     = "argocd"
 
   validation {
-    condition = var.gitops_tool == "none" || var.gitops_tool == "argocd" || var.gitops_tool == "fluxcd"
+    condition     = var.gitops_tool == "none" || var.gitops_tool == "argocd" || var.gitops_tool == "fluxcd"
     error_message = "gitops_tool must be either 'none', 'argocd' or 'fluxcd'"
   }
 }

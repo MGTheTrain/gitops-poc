@@ -17,7 +17,7 @@ resource "azurerm_subnet" "this" {
   resource_group_name  = azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = [cidrsubnet("${var.virtual_network_address_space[0]}", 8, (count.index * 2) + 2)]
-  count = var.number_of_aks
+  count                = var.number_of_aks
 }
 
 resource "tls_private_key" "this" {

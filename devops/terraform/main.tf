@@ -11,13 +11,13 @@ resource "azurerm_storage_account" "this" {
   location                 = azurerm_resource_group.this.location
   account_tier             = var.sa_account_tier
   account_replication_type = var.sa_account_replication_type
-  count = var.number_of_storage_accounts
-  tags = local.tags
+  count                    = var.number_of_storage_accounts
+  tags                     = local.tags
 }
 
 resource "azurerm_storage_container" "tf_backend" {
   name                  = "${var.digital_product_affix}${var.environment}sac${var.resource_instance_number}"
   storage_account_name  = azurerm_storage_account.this[count.index].name
-  count = var.number_of_storage_accounts
+  count                 = var.number_of_storage_accounts
   container_access_type = var.sc_container_access_type
 }

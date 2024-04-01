@@ -11,8 +11,8 @@ provider "kubernetes" {
 terraform {
   required_providers {
     helm = {
-      source                = "helm"
-      version               = ">= 2.5.0"
-    }	
+      source  = "helm"
+      version = ">= 2.5.0"
+    }
   }
 }

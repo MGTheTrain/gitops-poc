@@ -1,17 +1,17 @@
 resource "kubernetes_namespace" "gitops_ftw_namespace" {
   metadata {
     annotations = local.tags
-    labels = local.tags
-    name = var.k8s_namespace
+    labels      = local.tags
+    name        = var.k8s_namespace
   }
 }
 
 resource "kubernetes_secret" "acr_secret" {
   metadata {
-    name = "acr-secret"
-    namespace = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
+    name        = "acr-secret"
+    namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
     annotations = local.tags
-    labels = local.tags
+    labels      = local.tags
   }
   type = "kubernetes.io/dockerconfigjson"
   data = {
@@ -29,9 +29,9 @@ resource "kubernetes_secret" "acr_secret" {
 
 # ArgoCD or FLuxCD helm charts
 resource "helm_release" "argocd" {
-  name = "argocd"
+  name       = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
-  chart      = "argo-cd" 
+  chart      = "argo-cd"
   version    = "6.7.5"
   namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.gitops_tool == "argocd" ? 1 : 0
@@ -53,7 +53,7 @@ resource "helm_release" "nginx_ingress_controller" {
   chart      = "ingress-nginx"
   version    = "4.10.0"
   namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
-  
+
   set {
     name  = "service.type"
     value = "LoadBalancer"
@@ -62,12 +62,12 @@ resource "helm_release" "nginx_ingress_controller" {
 
 resource "kubernetes_ingress_v1" "gitops_ftw_ingress_argocd" {
   wait_for_load_balancer = true
-  count      = var.gitops_tool == "argocd" ? 1 : 0
+  count                  = var.gitops_tool == "argocd" ? 1 : 0
   metadata {
-    name = "${var.k8s_namespace}-ingress"
-    namespace = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
+    name        = "${var.k8s_namespace}-ingress"
+    namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
     annotations = local.tags
-    labels = local.tags
+    labels      = local.tags
   }
   spec {
     ingress_class_name = "nginx"
@@ -102,12 +102,12 @@ resource "kubernetes_ingress_v1" "gitops_ftw_ingress_argocd" {
 
 resource "kubernetes_ingress_v1" "gitops_ftw_ingress_fluxcd" {
   wait_for_load_balancer = true
-  count      = var.gitops_tool == "fluxcd" ? 1 : 0
+  count                  = var.gitops_tool == "fluxcd" ? 1 : 0
   metadata {
-    name = "${var.k8s_namespace}-ingress"
-    namespace = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
+    name        = "${var.k8s_namespace}-ingress"
+    namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
     annotations = local.tags
-    labels = local.tags
+    labels      = local.tags
   }
   spec {
     ingress_class_name = "nginx"
