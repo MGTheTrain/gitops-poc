@@ -39,7 +39,7 @@ variable "gitops_tool" {
   default     = "argocd"
 
   validation {
-    condition = var.gitops_tool == "argocd" || var.gitops_tool == "fluxcd"
-    error_message = "gitops_tool must be either 'argocd' or 'fluxcd'"
+    condition = var.gitops_tool == "none" || var.gitops_tool == "argocd" || var.gitops_tool == "fluxcd"
+    error_message = "gitops_tool must be either 'none', 'argocd' or 'fluxcd'"
   }
 }
