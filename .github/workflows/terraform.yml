@@ -35,7 +35,7 @@ jobs:
         run: terraform apply --auto-approve
         continue-on-error: false
         working-directory: ./devops/terraform
-  tf-k8s-service-services-operations:
+  tf-k8s-service-operations:
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-destroy' }}
     steps:
