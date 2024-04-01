@@ -19,16 +19,29 @@ Repository deploying and AKS or EKS cluster on demand, installing ArgoCD or Flux
 
 ## Getting started
 
-### Deploy an AKS or EKS cluster with ArgoCD or Flux installations
+Github workflows will be utilized in [this](./.github/workflows/) and the [helm-chart-samples-ftw](https://github.com/MGTheTrain/helm-chart-samples-ftw/tree/main/.github/workflows) Github repository. Required secrets need to be set therefore for those Github repositories.
 
-TBD
+### Preconditions
 
-### Destroy the AKS or EKS cluster
+0. Create an ACR trough the [terraform.yml workflow](https://github.com/MGTheTrain/helm-chart-samples-ftw/actions/workflows/terraform.yml)
+1. **Optional** Build and push a sample service with release version tag to the ACR trough the [docker_image.yml workflow](https://github.com/MGTheTrain/helm-chart-samples-ftw/actions/workflows/docker_image.yml). 
+2. Deploy an Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
 
-TBD
+### Deploy an AKS or EKS cluster and install the ArgoCD or FluxCD helm charts
+
+0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`
+1. **Optional** Install only helm charts to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-install`
+
+**NOTE:** Set all the required Github secrets for aboves workflows
 
 ### Showcase GitOps
 
 Configure example Helm chart services and configurations in the [helm-chart-samples-ftw Github repository](https://github.com/MGTheTrain/helm-chart-samples-ftw). Refer to those sources in ArgoCD applications and Flux HelmReleases. Merge pull requests in `main` branches of these repositories to validate whether the defined state of the Helm charts synchronizes with the Kubernetes cluster via the Sync Controller.
 
 TBD
+
+
+### Destroy the AKS or EKS cluster or uninstall helm charts
+
+0. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
+1. **Optional** Uninstall only helm charts of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
