@@ -12,10 +12,10 @@ Repository deploying and AKS or EKS cluster on demand, installing ArgoCD or Flux
 
 ## Features
 
-- [ ] AKS or EKS deployment trough terraform cli tool and HCL files. 
-- [ ] ArgoCD or Flux installations on deployed k8s cluster
-- [ ] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
-- [ ] CD wofklow for on demand deployments of k8s clusters (Options: AKS or EKS) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
+- [x] AKS or EKS deployment trough terraform cli tool and HCL files. 
+- [x] ArgoCD or Flux installations on deployed k8s cluster
+- [x] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
+- [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS or EKS) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
 
 ## Getting started
 
