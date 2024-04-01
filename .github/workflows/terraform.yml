@@ -88,7 +88,7 @@ jobs:
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
         run: |
-          terraform init \ 
+          terraform init \
           -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
           -backend-config="storage_account_name=gftfbesbxsa001" \
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
