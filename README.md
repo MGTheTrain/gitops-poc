@@ -39,9 +39,8 @@ Github workflows will be utilized in [this](./.github/workflows/) and the [helm-
 In order to port forward and check helm chart pods, run following commands:
 
 ```sh
-# e.g. Check pod responsible for the ArgoCD Web UI
 kubectl get pods -n gitops-ftw
-kubectl port-forward -n gitops-ftw <argocd-server-pod-name> 8090:80
+kubectl port-forward -n gitops-ftw  <pod-name> <local-port>:<server-port>
 ```
 
 ### Showcase GitOps
