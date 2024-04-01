@@ -109,7 +109,12 @@ jobs:
           export TF_VAR_acr_password="${{ secrets.ACR_PASSWORD }}"
           export TF_VAR_acr_login_server_name="${{ secrets.ACR_LOGIN_SERVER_NAME }}"
           export TF_VAR_gitops_tool="${{ github.event.inputs.GITOPS_TOOL }}"
-          terraform apply --auto-approve
+          terraform apply \
+            -var="acr_username=${TF_VAR_acr_username}" \
+            -var="acr_password=${TF_VAR_acr_password}" \
+            -var="acr_login_server_name=${TF_VAR_acr_login_server_name}" \
+            -var="gitops_tool=${TF_VAR_gitops_tool}" \
+            --auto-approve
         continue-on-error: false
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' }}
