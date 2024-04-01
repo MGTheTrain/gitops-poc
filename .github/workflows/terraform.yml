@@ -30,6 +30,7 @@ jobs:
   #       TBD
   tf-k8s-service-services-operations:
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-destroy' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
