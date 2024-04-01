@@ -25,18 +25,6 @@ resource "tls_private_key" "this" {
   rsa_bits  = 4096
 }
 
-resource "azurerm_public_ip" "this" {
-  name                = local.public_ips[count.index]
-  resource_group_name = azurerm_resource_group.this.name
-  location            = azurerm_resource_group.this.location
-  allocation_method   = "Static"
-  sku                 = "Standard"
-
-  count               = var.number_of_aks
-
-  tags = local.tags
-}
-
 resource "azurerm_network_security_group" "this" {
   name                = local.vm_network_security_groups[count.index]
   location            = azurerm_resource_group.this.location
