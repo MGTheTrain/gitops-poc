@@ -40,7 +40,7 @@ resource "helm_release" "argocd" {
 resource "helm_release" "fluxcd" {
   name       = "fluxcd"
   repository = "https://fluxcd-community.github.io/helm-charts"
-  chart      = "fluxcd-community"
+  chart      = "flux2"
   version    = "2.12.4"
   namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.gitops_tool == "fluxcd" ? 1 : 0
