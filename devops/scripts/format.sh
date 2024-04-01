@@ -11,7 +11,7 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 echo "#####################################################################################################"
-echo -e "$BLUE INFO: $NC About to generate auto-format hcl files and hcl docs"
+echo -e "$BLUE INFO: $NC About to auto-format hcl files and generate hcl docs"
 
 TF_ENVS_FOLDER="./terraform/envs"
 TF_MODULES_FOLDER="./terraform/modules"
