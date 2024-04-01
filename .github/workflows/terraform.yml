@@ -82,7 +82,7 @@ jobs:
           -backend-config="key=sbx-k8s-service-deployment/terraform.tfstate"
 
           terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
-          cat ./config
+          mkdir -vp ~/.kube
           head -n -3 ./config > ~/.kube/config
           cat ~/.kube/config
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
