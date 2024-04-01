@@ -17,6 +17,7 @@ resource "azurerm_storage_account" "this" {
 
 resource "azurerm_storage_container" "tf_backend" {
   name                  = "${var.digital_product_affix}${var.environment}sac${var.resource_instance_number}"
-  storage_account_name  = var.digital_product_affix
+  storage_account_name  = azurerm_storage_account.this[count.index].name
+  count = var.number_of_storage_accounts
   container_access_type = var.sc_container_access_type
 }
