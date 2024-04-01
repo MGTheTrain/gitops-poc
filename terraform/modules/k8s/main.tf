@@ -32,7 +32,7 @@ resource "helm_release" "argocd" {
   name = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd" 
-  version    = "5.34.5"
+  version    = "6.7.5"
   namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.gitops_tool == "argocd" ? 1 : 0
 }
