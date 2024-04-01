@@ -1,9 +1,3 @@
-variable "digital_product_affix" {
-  default     = "gitops-ftw"
-  description = "The digital product affix."
-  type        = string
-}
-
 variable "environment" {
   default     = "sbx"
   description = "The environment."
@@ -13,12 +7,6 @@ variable "environment" {
     condition     = can(regex("^(sbx|dev|qas|prd)$", var.environment))
     error_message = "Invalid input, options: \"sbx\", \"dev\", \"qas\", \"prd\"."
   }
-}
-
-variable "team" {
-  default     = "MG Innovators"
-  description = "The team used for tagging resource groups and resources."
-  type        = string
 }
 
 # K8s
