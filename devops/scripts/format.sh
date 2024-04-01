@@ -3,7 +3,7 @@
 set -euo pipefail
 
 SCRIPT_DIR=$(dirname "$BASH_SOURCE")
-ROOT_PROJECT_DIR=$SCRIPT_DIR/..
+ROOT_PROJECT_DIR=$SCRIPT_DIR/../..
 
 cd $ROOT_PROJECT_DIR
 
