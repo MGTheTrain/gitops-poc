@@ -104,14 +104,14 @@ jobs:
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
       - name: Install helm charts
         shell: bash
-        run: terraform apply --auto-approve
+        run: |
+          eport TF_VAR_acr_username=${{ secrets.ACR_USERNAME }} 
+          eport TF_VAR_acr_password=${{ secrets.ACR_PASSWORD }}
+          eport TF_VAR_acr_login_server_name=${{ secrets.ACR_LOGIN_SERVER_NAME }}
+          eport TF_VAR_gitops_tool=${{ github.event.inputs.GITOPS_TOOL }}
+          terraform apply --auto-approve
         continue-on-error: false
         working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
-        env:
-          TF_VAR_acr_username: ${{ secrets.ACR_USERNAME }} 
-          TF_VAR_acr_password: ${{ secrets.ACR_PASSWORD }}
-          TF_VAR_acr_login_server_name: ${{ secrets.ACR_LOGIN_SERVER_NAME }}
-          TF_VAR_gitops_tool: ${{ github.event.inputs.GITOPS_TOOL }}
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-install' || github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' }}
       - name: Uninstall helm charts
         run: terraform destroy --auto-approve
