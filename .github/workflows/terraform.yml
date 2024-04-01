@@ -1,4 +1,4 @@
-name: Workflow for deploying an AKS or EKS and install helm charts to those K8s cluster
+name: Workflow for deploying and destroying an ACR or AKS or EKS, as well as installing or uninstalling Helm charts on those Kubernetes clusters
 
 on:
   workflow_dispatch:
@@ -51,21 +51,21 @@ jobs:
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
           -backend-config="key=sbx-k8s-service-deployment/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-service-deployment
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
       - name: Deploy Kubernetes service and related resources
         run: terraform apply --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-service-deployment
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-deploy' }}
       - name: Uninstall helm charts
         run: terraform destroy --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-service-configuration
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-destroy' }}
       - name: Destroy Kubernetes service and related resources
         run: terraform destroy --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-service-deployment
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-deployment
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'k8s-service-destroy' }}
   tf-helm-charts-operations:
     runs-on: ubuntu-latest
@@ -84,11 +84,11 @@ jobs:
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
           -backend-config="key=sbx-k8s-service-configuration/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-service-configuration
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
       - name: Install helm charts
         run: terraform apply --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-service-configuration
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
         env:
           TF_VAR_acr_username: ${{ secrets.ACR_USERNAME }} 
           TF_VAR_acr_password: ${{ secrets.ACR_PASSWORD }}
@@ -97,5 +97,5 @@ jobs:
       - name: Uninstall helm charts
         run: terraform destroy --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-service-configuration
+        working-directory: ./terraform/envs/${{ github.event.inputs.ENVIRONMENT }}-k8s-configuration
         if: ${{ github.event.inputs.INFRASTRUCTURE_OPERATIONS == 'helm-charts-uninstall' }}
