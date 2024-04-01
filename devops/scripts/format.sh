@@ -15,7 +15,7 @@ echo -e "$BLUE INFO: $NC About to generate auto-format hcl files and hcl docs"
 
 TF_ENVS_FOLDER="./terraform/envs"
 TF_MODULES_FOLDER="./terraform/modules"
-DEVOPS_TF_FOLDER="./devops/teraform"
+DEVOPS_TF_FOLDER="./devops/terraform"
 for dir in ${TF_ENVS_FOLDER}/sbx-k8s-deployment ${TF_ENVS_FOLDER}/sbx-k8s-configuration ${TF_MODULES_FOLDER}/az ${TF_MODULES_FOLDER}/aws ${DEVOPS_TF_FOLDER} ; do
   terraform-docs markdown table --output-file README.md --hide providers --output-mode replace "$dir"
 done
