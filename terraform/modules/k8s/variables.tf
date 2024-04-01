@@ -33,14 +33,8 @@ variable "acr_password" {
   description = "Sets an ACR password."
 }
 
-variable "install_argocd" {
-  description = "Whether to install Argo CD or not"
-  type        = bool
-  default     = true
-}
-
-variable "install_fluxcd" {
-  description = "Whether to install Flux CD or not"
-  type        = bool
-  default     = false
+variable "gitops_tool" {
+  description = "String determining whether to install Argo CD or FluxCD"
+  type        = string
+  default     = "argocd"
 }

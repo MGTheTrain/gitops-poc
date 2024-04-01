@@ -34,7 +34,7 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd" 
   version    = "5.34.5"
   namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
-  count      = var.install_argocd ? 1 : 0
+  count      = var.gitops_tool == "argocd" ? 1 : 0
 }
 
 resource "helm_release" "fluxcd" {
@@ -43,7 +43,7 @@ resource "helm_release" "fluxcd" {
   chart      = "fluxcd-community"
   version    = "2.12.4"
   namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
-  count      = var.install_fluxcd ? 1 : 0
+  count      = var.gitops_tool == "fluxcd" ? 1 : 0
 }
 
 # Nginx controller and Ingress
@@ -60,8 +60,9 @@ resource "helm_release" "nginx_ingress_controller" {
   }
 }
 
-resource "kubernetes_ingress_v1" "gitops_ftw_ingress" {
+resource "kubernetes_ingress_v1" "gitops_ftw_ingress_argocd" {
   wait_for_load_balancer = true
+  count      = var.gitops_tool == "argocd" ? 1 : 0
   metadata {
     name = "${var.k8s_namespace}-ingress"
     namespace = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
@@ -83,17 +84,46 @@ resource "kubernetes_ingress_v1" "gitops_ftw_ingress" {
           }
           path = "/api/v1/hws"
         }
-        # path {
-        #   backend {
-        #     service {
-        #       name = "some-other-service-service"
-        #       port {
-        #         number = 80
-        #       }
-        #     }
-        #   }
-        #   path = "/"
-        # }
+        path {
+          backend {
+            service {
+              name = "argocd-server"
+              port {
+                number = 80
+              }
+            }
+          }
+          path = "/"
+        }
+      }
+    }
+  }
+}
+
+resource "kubernetes_ingress_v1" "gitops_ftw_ingress_fluxcd" {
+  wait_for_load_balancer = true
+  count      = var.gitops_tool == "fluxcd" ? 1 : 0
+  metadata {
+    name = "${var.k8s_namespace}-ingress"
+    namespace = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
+    annotations = local.tags
+    labels = local.tags
+  }
+  spec {
+    ingress_class_name = "nginx"
+    rule {
+      http {
+        path {
+          backend {
+            service {
+              name = "hello-world-service"
+              port {
+                number = 80
+              }
+            }
+          }
+          path = "/api/v1/hws"
+        }
       }
     }
   }
