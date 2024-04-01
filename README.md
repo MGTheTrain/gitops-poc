@@ -59,9 +59,6 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 Configure example Helm chart services and configurations in the [helm-chart-samples-ftw Github repository](https://github.com/MGTheTrain/helm-chart-samples-ftw). Refer to those sources in ArgoCD applications and Flux HelmReleases. Merge pull requests in `main` branches of these repositories to validate whether the defined state of the Helm charts synchronizes with the Kubernetes cluster via the Sync Controller.
 
-TBD
-
-
 ### Destroy the AKS or EKS cluster or uninstall helm charts
 
 0. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
