@@ -34,7 +34,12 @@ variable "acr_password" {
 }
 
 variable "gitops_tool" {
-  description = "String determining whether to install Argo CD or FluxCD"
+  description = "String determining whether to install Argo CD or FluxCD. Viable options: [ argocd, fluxcd ]"
   type        = string
   default     = "argocd"
+
+  validation {
+    condition = var.gitops_tool == "argocd" || var.gitops_tool == "fluxcd"
+    error_message = "gitops_tool must be either 'argocd' or 'fluxcd'"
+  }
 }
