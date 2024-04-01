@@ -41,6 +41,8 @@ In order to port forward and check helm chart pods, run following commands:
 ```sh
 kubectl get pods -n gitops-ftw
 kubectl port-forward -n gitops-ftw  <pod-name> <local-port>:<server-port>
+# e.g. ArgoCD
+kubectl port-forward -n gitops-ftw argocd-server-<UUID> 8080:8080
 ```
 
 ### Showcase GitOps
