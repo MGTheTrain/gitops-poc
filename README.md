@@ -34,6 +34,16 @@ Github workflows will be utilized in [this](./.github/workflows/) and the [helm-
 
 **NOTE:** Set all the required Github secrets for aboves workflows
 
+#### Port forwarding
+
+In order to port forward and check helm chart pods, run following commands:
+
+```sh
+# e.g. Check pod responsible for the ArgoCD Web UI
+kubectl get pods -n gitops-ftw
+kubectl port-forward -n gitops-ftw <argocd-server-pod-name> 8090:80
+```
+
 ### Showcase GitOps
 
 Configure example Helm chart services and configurations in the [helm-chart-samples-ftw Github repository](https://github.com/MGTheTrain/helm-chart-samples-ftw). Refer to those sources in ArgoCD applications and Flux HelmReleases. Merge pull requests in `main` branches of these repositories to validate whether the defined state of the Helm charts synchronizes with the Kubernetes cluster via the Sync Controller.
