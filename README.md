@@ -21,7 +21,7 @@ Repository deploying and AKS or EKS cluster on demand, installing ArgoCD or Flux
 
 Github workflows will be utilized in [this](./.github/workflows/) and the [helm-chart-samples-ftw](https://github.com/MGTheTrain/helm-chart-samples-ftw/tree/main/.github/workflows) Github repository. Required secrets need to be set therefore for those Github repositories. Once the workflows described in the **Preconditions** and **Deploy an AKS or EKS cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
 
-![deployed-resource-groups.PNG](./images/deployed-resource-groups.PNG)
+![deployed-rgs.PNG](./images/deployed-rgs.PNG)
 
 ### Preconditions
 
