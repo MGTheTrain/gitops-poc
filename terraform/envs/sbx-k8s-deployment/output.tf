@@ -1,9 +1,9 @@
 output "resource_group_name" {
-  value = module.az.name
+  value = module.az.resource_group_name
 }
 
 output "aks_tls_private_key" {
-  value     =  module.az.private_key_pem
+  value     =  module.az.aks_tls_private_key
   sensitive = true
 }
 
