@@ -29,10 +29,10 @@ resource "kubernetes_secret" "acr_secret" {
 
 # ArgoCD or FLuxCD helm charts
 resource "helm_release" "argocd" {
-  name       = "argocd"
+  name = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
-  chart      = "argo"
-  version    = "6.7.6"
+  chart      = "argo-cd" 
+  version    = "5.34.5"
   namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.install_argocd ? 1 : 0
 }
