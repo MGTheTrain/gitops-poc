@@ -28,7 +28,7 @@ Github workflows will be utilized in [this](./.github/workflows/) and the [helm-
 
 0. Create an ACR trough the [terraform.yml workflow](https://github.com/MGTheTrain/helm-chart-samples-ftw/actions/workflows/terraform.yml)
 1. **Optional:** Build and push a sample service with release version tag to the ACR trough the [docker_image.yml workflow](https://github.com/MGTheTrain/helm-chart-samples-ftw/actions/workflows/docker_image.yml). 
-2. Deploy an Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
+2. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
 
 ### Deploy an AKS or EKS cluster and install the ArgoCD or FluxCD helm charts
 
