@@ -1,0 +1,10 @@
+{
+    "name": "Tools for HCL repos",
+    "image": "ubuntu:20.04",
+    // Features to add to the dev container. More info: https://containers.dev/features
+    "features": {
+        "ghcr.io/devcontainers/features/terraform:1": {},
+        "ghcr.io/devcontainers-contrib/features/terraform-docs:1": {}
+    },
+    "remoteUser": "root"
+}
