@@ -95,7 +95,7 @@ argocd app sync nginx
 # In terminal process B - Monitor Application Status
 argocd app get nginx
 ```
-Results would look the following:
+Results would look the following for the nginx helm chart:
 
 ![registered-and-synced-nginx-argocd-app.PNG](./images/registered-and-synced-nginx-argocd-app.PNG)
 
