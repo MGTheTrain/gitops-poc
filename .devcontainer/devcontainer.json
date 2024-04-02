@@ -8,5 +8,6 @@
         "ghcr.io/devcontainers/features/terraform:1": {},
         "ghcr.io/devcontainers-contrib/features/terraform-docs:1": {}
     },
+    "postCreateCommand": "bash .devcontainer/scripts/install-dependencies.sh",
     "remoteUser": "root"
 }
