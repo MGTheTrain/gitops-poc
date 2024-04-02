@@ -70,10 +70,10 @@ argocd app create sample-service \
   --dest-namespace <NAMESPACE> \
   --revision <TARGET_REVISION>
 
-# e.g.
+# e.g. for sample-service chart
 argocd app create sample-service \
   --repo git@github.com:MGTheTrain/helm-chart-samples-ftw.git \
-  --path helm/argocd/nginx.yml \
+  --path gitops/argocd/sample-service.yml \ 
   --dest-server gitopsftw-sbx-aks001-zb750vee.hcp.westeurope.azmk8s.io \
   --dest-namespace gitops-ftw \
   --revision main
