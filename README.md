@@ -57,7 +57,27 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 ### Showcase GitOps
 
-Configure example Helm chart services and configurations in the [helm-chart-samples-ftw Github repository](https://github.com/MGTheTrain/helm-chart-samples-ftw). Refer to those sources in ArgoCD applications and Flux HelmReleases. Merge pull requests in `main` branches of these repositories to validate whether the defined state of the Helm charts synchronizes with the Kubernetes cluster via the Sync Controller.
+#### Registering ArgoCD applications or Kustomization's
+
+Trough CLI for ArgoCD:
+
+```sh
+TBD
+```
+
+Trough CLI for FluxCD:
+
+```sh
+TBD
+```
+
+Trough ArgoCD Web UI:
+
+TBD - sample image
+
+#### Changing service versions
+
+Navigate to [the Showcase GitOps section of the helm-chart-samples-ftw GitHub repository](https://github.com/MGTheTrain/helm-chart-samples-ftw/tree/main?tab=readme-ov-file#showcase-gitops)
 
 ### Destroy the AKS or EKS cluster or uninstall helm charts
 
