@@ -61,5 +61,5 @@ Configure example Helm chart services and configurations in the [helm-chart-samp
 
 ### Destroy the AKS or EKS cluster or uninstall helm charts
 
-0. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
-1. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
+0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
+1. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-ftw/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
