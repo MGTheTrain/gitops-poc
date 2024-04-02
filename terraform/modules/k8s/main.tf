@@ -2,7 +2,33 @@ resource "kubernetes_namespace" "gitops_ftw_namespace" {
   metadata {
     annotations = local.tags
     labels      = local.tags
-    name        = var.k8s_namespace
+    name        = "gitops-ftw"
+  }
+}
+
+resource "kubernetes_namespace" "argocd_namespace" {
+  metadata {
+    annotations = local.tags
+    labels      = local.tags
+    name        = "argocd"
+  }
+  count      = var.gitops_tool == "argocd" ? 1 : 0
+}
+
+resource "kubernetes_namespace" "flux_namespace" {
+  metadata {
+    annotations = local.tags
+    labels      = local.tags
+    name        = "flux-system"
+  }
+  count      = var.gitops_tool == "fluxcd" ? 1 : 0
+}
+
+resource "kubernetes_namespace" "nginx_controller_namespace" {
+  metadata {
+    annotations = local.tags
+    labels      = local.tags
+    name        = "nginx-controller"
   }
 }
 
@@ -60,12 +86,12 @@ resource "helm_release" "nginx_ingress_controller" {
   }
 }
 
-resource "kubernetes_ingress_v1" "gitops_ftw_ingress_argocd" {
+resource "kubernetes_ingress_v1" "gitops_ftw_ingress" {
   wait_for_load_balancer = true
   count                  = var.gitops_tool == "argocd" ? 1 : 0
   metadata {
-    name        = "${var.k8s_namespace}-ingress"
-    namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
+    name        = "gitops-ftw-ingress"
+    namespace   = kubernetes_namespace.nginx_controller_namespace.metadata.0.name
     annotations = local.tags
     labels      = local.tags
   }
@@ -87,42 +113,13 @@ resource "kubernetes_ingress_v1" "gitops_ftw_ingress_argocd" {
         path {
           backend {
             service {
-              name = "argocd-server"
+              name = "nginx"
               port {
                 number = 80
               }
             }
           }
           path = "/"
-        }
-      }
-    }
-  }
-}
-
-resource "kubernetes_ingress_v1" "gitops_ftw_ingress_fluxcd" {
-  wait_for_load_balancer = true
-  count                  = var.gitops_tool == "fluxcd" ? 1 : 0
-  metadata {
-    name        = "${var.k8s_namespace}-ingress"
-    namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
-    annotations = local.tags
-    labels      = local.tags
-  }
-  spec {
-    ingress_class_name = "nginx"
-    rule {
-      http {
-        path {
-          backend {
-            service {
-              name = "hello-world-service"
-              port {
-                number = 80
-              }
-            }
-          }
-          path = "/api/v1/hws"
         }
       }
     }

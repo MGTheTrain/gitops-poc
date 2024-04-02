@@ -10,11 +10,6 @@ variable "environment" {
 }
 
 # K8s
-variable "k8s_namespace" {
-  default     = "gitops-ftw"
-  description = "K8s gitops-ftw namespace."
-}
-
 variable "acr_login_server_name" {
   default     = "TBD"
   sensitive   = true
