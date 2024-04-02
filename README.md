@@ -62,7 +62,18 @@ The default username is `admin`. The default password can be obtained trough: `k
 Trough CLI for ArgoCD:
 
 ```sh
-TBD
+# Register Application
+argocd app create sample-service \
+  --repo <GIT_REPO_URL> \
+  --path <PATH_IN_REPO> \
+  --dest-server <K8S_CLUSTER_URL> \
+  --dest-namespace <NAMESPACE> \
+  --revision <TARGET_REVISION>
+
+# Sync Application
+argocd app sync sample-service
+# Monitor Application Status
+argocd app get my-app
 ```
 
 Trough CLI for FluxCD:
@@ -71,9 +82,6 @@ Trough CLI for FluxCD:
 TBD
 ```
 
-Trough ArgoCD Web UI:
-
-TBD - sample image
 
 #### Changing service versions
 
