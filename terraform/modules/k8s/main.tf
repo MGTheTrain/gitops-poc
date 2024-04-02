@@ -6,22 +6,6 @@ resource "kubernetes_namespace" "gitops_ftw_namespace" {
   }
 }
 
-resource "kubernetes_namespace" "argocd_namespace" {
-  metadata {
-    annotations = local.tags
-    labels      = local.tags
-    name        = "argocd"
-  }
-}
-
-resource "kubernetes_namespace" "flux_namespace" {
-  metadata {
-    annotations = local.tags
-    labels      = local.tags
-    name        = "flux-system"
-  }
-}
-
 resource "kubernetes_namespace" "nginx_controller_namespace" {
   metadata {
     annotations = local.tags
@@ -57,7 +41,6 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
   version    = "6.7.5"
-  namespace  = kubernetes_namespace.argocd_namespace.metadata.0.name
   count      = var.gitops_tool == "argocd" ? 1 : 0
 }
 
@@ -66,7 +49,6 @@ resource "helm_release" "fluxcd" {
   repository = "https://fluxcd-community.github.io/helm-charts"
   chart      = "flux2"
   version    = "2.12.4"
-  namespace  = kubernetes_namespace.flux_namespace.metadata.0.name
   count      = var.gitops_tool == "fluxcd" ? 1 : 0
 }
 
