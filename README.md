@@ -62,7 +62,7 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 #### Registering ArgoCD applications or Kustomization's
 
-Trough CLI for ArgoCD:
+##### Trough CLI for ArgoCD:
 
 ```sh
 # Port forward in terminal process A
@@ -95,22 +95,17 @@ argocd app sync nginx
 # In terminal process B - Monitor Application Status
 argocd app get nginx
 ```
-Results would look the following for the nginx helm chart:
+The Argo CD application that has been registered and synchronized should resemble the following:
 
 ![registered-and-synced-nginx-argocd-app.PNG](./images/registered-and-synced-nginx-argocd-app.PNG)
 
 The same applies for the internal `sample-service` helm chart
 
-Trough CLI for FluxCD:
+##### Trough CLI for FluxCD:
 
 ```sh
 TBD
 ```
-
-
-#### Changing service versions
-
-Navigate to [the Showcase GitOps section of the helm-chart-samples-ftw GitHub repository](https://github.com/MGTheTrain/helm-chart-samples-ftw/tree/main?tab=readme-ov-file#showcase-gitops)
 
 ### Destroy the AKS or EKS cluster or uninstall helm charts
 
