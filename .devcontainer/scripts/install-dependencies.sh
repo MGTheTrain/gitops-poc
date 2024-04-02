@@ -19,6 +19,6 @@ chmod +x ./kubectl
 mv ./kubectl /usr/local/bin/kubectl
 
 # helm
-https://get.helm.sh/helm-v3.14.3-linux-amd64.tar.gz
+curl -LO https://get.helm.sh/helm-v3.14.3-linux-amd64.tar.gz
 tar -zxvf helm-v3.14.3-linux-amd64.tar.gz
 mv linux-amd64/helm /usr/local/bin/helm
