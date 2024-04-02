@@ -49,7 +49,7 @@ kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
 When checking for example the ArgoCD Web UI, you would run:
 
 ```sh
-kubectl port-forward -n default argocd-server-<UUID> 8080:8080
+kubectl port-forward -n default <argocd-server-pod> 8080:8080
 ```
 
 and visit in a browser of choice `localhost:8080`. You would need to authenticate with admin credentials.
@@ -65,26 +65,34 @@ The default username is `admin`. The default password can be obtained trough: `k
 Trough CLI for ArgoCD:
 
 ```sh
-# Register Application
+# Port forward in terminal process A
+kubectl -n aport-forward -n default <argocd-server-pod> 8080:8080
+
+# In terminal process B - Login
+argocd login localhost:8080
+
+# In terminal process B - Register Application
 argocd app create sample-service \
   --repo <GIT_REPO_URL> \
   --path <PATH_IN_REPO> \
   --dest-server <K8S_CLUSTER_URL> \
   --dest-namespace <NAMESPACE> \
-  --revision <TARGET_REVISION>
+  --revision <TARGET_REVISION> \
+  --server <ARGOCD_SERVER>
 
 # e.g. for sample-service chart
 argocd app create sample-service \
-  --repo git@github.com:MGTheTrain/helm-chart-samples-ftw.git \
-  --path gitops/argocd/sample-service.yml \ 
-  --dest-server gitopsftw-sbx-aks001-zb750vee.hcp.westeurope.azmk8s.io \
+  --repo https://github.com/MGTheTrain/helm-chart-samples-ftw.git \
+  --path gitops/argocd/sample-service \ 
+  --dest-server https://kubernetes.default.svc \
   --dest-namespace gitops-ftw \
-  --revision main
+  --revision main \
+  --server localhost:8080
 
-# Sync Application
+# In terminal process B - Sync Application
 argocd app sync sample-service
-# Monitor Application Status
-argocd app get my-app
+# In terminal process B - Monitor Application Status
+argocd app get sample-service
 ```
 
 Trough CLI for FluxCD:
