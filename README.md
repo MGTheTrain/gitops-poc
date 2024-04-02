@@ -42,18 +42,21 @@ Github workflows will be utilized in [this](./.github/workflows/) and the [helm-
 In order to port forward and check helm chart pods, run following commands:
 
 ```sh
-kubectl get pods -n gitops-ftw
-kubectl port-forward -n gitops-ftw  <pod-name> <local-port>:<server-port>
+kubectl get pods -A
+kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
 ```
 
 When checking for example the ArgoCD Web UI, you would run:
 
 ```sh
-kubectl port-forward -n gitops-ftw argocd-server-<UUID> 8080:8080
+kubectl port-forward -n default argocd-server-<UUID> 8080:8080
 ```
 
 and visit in a browser of choice `localhost:8080`. You would need to authenticate with admin credentials.
-The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n gitops-ftw -o jsonpath="{.data.password}" | base64 -d`.
+
+![argocd-web-ui.PNG](./images/argocd-web-ui.PNG)
+
+The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n default -o jsonpath="{.data.password}" | base64 -d`.
 
 ### Showcase GitOps
 
