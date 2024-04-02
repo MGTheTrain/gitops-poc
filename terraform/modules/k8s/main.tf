@@ -12,7 +12,7 @@ resource "kubernetes_namespace" "argocd_namespace" {
     labels      = local.tags
     name        = "argocd"
   }
-  count      = var.gitops_tool == "argocd" ? 1 : 0
+  count = var.gitops_tool == "argocd" ? 1 : 0
 }
 
 resource "kubernetes_namespace" "flux_namespace" {
@@ -21,7 +21,7 @@ resource "kubernetes_namespace" "flux_namespace" {
     labels      = local.tags
     name        = "flux-system"
   }
-  count      = var.gitops_tool == "fluxcd" ? 1 : 0
+  count = var.gitops_tool == "fluxcd" ? 1 : 0
 }
 
 resource "kubernetes_namespace" "nginx_controller_namespace" {
