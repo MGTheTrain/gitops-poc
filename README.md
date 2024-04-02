@@ -70,9 +70,10 @@ kubectl -n aport-forward -n default <argocd-server-pod> 8080:8080
 
 # In terminal process B - Login
 argocd login localhost:8080
+# Prompted to provide username and password
 
 # In terminal process B - Register Application
-argocd app create sample-service \
+argocd app create nginx \
   --repo <GIT_REPO_URL> \
   --path <PATH_IN_REPO> \
   --dest-server <K8S_CLUSTER_URL> \
@@ -80,20 +81,25 @@ argocd app create sample-service \
   --revision <TARGET_REVISION> \
   --server <ARGOCD_SERVER>
 
-# e.g. for sample-service chart
-argocd app create sample-service \
+# e.g. for nginx chart
+argocd app create nginx \
   --repo https://github.com/MGTheTrain/helm-chart-samples-ftw.git \
-  --path gitops/argocd/sample-service \ 
+  --path gitops/argocd/nginx \ 
   --dest-server https://kubernetes.default.svc \
   --dest-namespace gitops-ftw \
   --revision main \
   --server localhost:8080
 
 # In terminal process B - Sync Application
-argocd app sync sample-service
+argocd app sync nginx
 # In terminal process B - Monitor Application Status
-argocd app get sample-service
+argocd app get nginx
 ```
+Results would look the following:
+
+![registered-and-synced-nginx-argocd-app.PNG](./images/registered-and-synced-nginx-argocd-app.PNG)
+
+The same applies for the internal `sample-service` helm chart
 
 Trough CLI for FluxCD:
 
