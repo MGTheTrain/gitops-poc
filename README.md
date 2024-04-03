@@ -99,7 +99,7 @@ The Argo CD application that has been registered and synchronized should resembl
 
 ![nginx-argocd-application.PNG](./images/nginx-argocd-application.PNG)
 
-![nginx-argocd-application-view2.PNG](./images/nginx-argocd-application-view2.PNG)
+![nginx-argocd-application-view-2.PNG](./images/nginx-argocd-application-view-2.PNG)
 
 The same applies for the internal `sample-service` helm chart
 
