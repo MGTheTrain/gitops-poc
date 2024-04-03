@@ -66,7 +66,7 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 ```sh
 # Port forward in terminal process A
-kubectl -n aport-forward -n default <argocd-server-pod> 8080:8080
+kubectl port-forward -n default <argocd-server-pod> 8080:8080
 
 # In terminal process B - Login
 argocd login localhost:8080
