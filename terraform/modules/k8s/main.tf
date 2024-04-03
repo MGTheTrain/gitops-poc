@@ -79,17 +79,17 @@ resource "kubernetes_ingress_v1" "gitops_ftw_ingress" {
     ingress_class_name = "nginx"
     rule {
       http {
-        path {
-          backend {
-            service {
-              name = "hello-world-service"
-              port {
-                number = 80
-              }
-            }
-          }
-          path = "/api/v1/hws"
-        }
+        # path {
+        #   backend {
+        #     service {
+        #       name = "hello-world-service"
+        #       port {
+        #         number = 80
+        #       }
+        #     }
+        #   }
+        #   path = "/api/v1/hws"
+        # }
         path {
           backend {
             service {
