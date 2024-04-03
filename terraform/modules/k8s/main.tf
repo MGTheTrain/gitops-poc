@@ -87,7 +87,7 @@ resource "kubernetes_ingress_v1" "gitops_ftw_ingress" {
         path {
           backend {
             service {
-              name = "nginx"
+              name = "nginx-app"
               port {
                 number = 80
               }
