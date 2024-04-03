@@ -97,7 +97,7 @@ argocd app get nginx
 ```
 The Argo CD application that has been registered and synchronized should resemble the following:
 
-![registered-and-synced-nginx-argocd-app.PNG](./images/registered-and-synced-nginx-argocd-app.PNG)
+![nginx-argocd-app.PNG](./images/nginx-argocd-app.PNG)
 
 The same applies for the internal `sample-service` helm chart
 
