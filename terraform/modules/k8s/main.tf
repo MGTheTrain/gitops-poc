@@ -6,14 +6,6 @@ resource "kubernetes_namespace" "gitops_ftw_namespace" {
   }
 }
 
-resource "kubernetes_namespace" "nginx_controller_namespace" {
-  metadata {
-    annotations = local.tags
-    labels      = local.tags
-    name        = "nginx-controller"
-  }
-}
-
 resource "kubernetes_secret" "acr_secret" {
   metadata {
     name        = "acr-secret"
@@ -41,6 +33,7 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
   version    = "6.7.5"
+  namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.gitops_tool == "argocd" ? 1 : 0
 }
 
@@ -49,6 +42,7 @@ resource "helm_release" "fluxcd" {
   repository = "https://fluxcd-community.github.io/helm-charts"
   chart      = "flux2"
   version    = "2.12.4"
+  namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.gitops_tool == "fluxcd" ? 1 : 0
 }
 
@@ -58,7 +52,7 @@ resource "helm_release" "nginx_ingress_controller" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
   version    = "4.10.0"
-  namespace  = kubernetes_namespace.nginx_controller_namespace.metadata.0.name
+  namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
 
   set {
     name  = "service.type"
@@ -71,7 +65,7 @@ resource "kubernetes_ingress_v1" "gitops_ftw_ingress" {
   count                  = var.gitops_tool == "argocd" ? 1 : 0
   metadata {
     name        = "gitops-ftw-ingress"
-    namespace   = kubernetes_namespace.nginx_controller_namespace.metadata.0.name
+    namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
     annotations = local.tags
     labels      = local.tags
   }
