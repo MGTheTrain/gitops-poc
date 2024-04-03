@@ -33,7 +33,7 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
   version    = "6.7.5"
-  namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
+  namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.gitops_tool == "argocd" ? 1 : 0
 }
 
@@ -42,7 +42,7 @@ resource "helm_release" "fluxcd" {
   repository = "https://fluxcd-community.github.io/helm-charts"
   chart      = "flux2"
   version    = "2.12.4"
-  namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
+  namespace  = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
   count      = var.gitops_tool == "fluxcd" ? 1 : 0
 }
 

@@ -17,10 +17,7 @@ No modules.
 | [helm_release.fluxcd](https://registry.terraform.io/providers/helm/latest/docs/resources/release) | resource |
 | [helm_release.nginx_ingress_controller](https://registry.terraform.io/providers/helm/latest/docs/resources/release) | resource |
 | [kubernetes_ingress_v1.gitops_ftw_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/ingress_v1) | resource |
-| [kubernetes_namespace.argocd_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
-| [kubernetes_namespace.flux_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [kubernetes_namespace.gitops_ftw_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
-| [kubernetes_namespace.nginx_controller_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [kubernetes_secret.acr_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 
 ## Inputs

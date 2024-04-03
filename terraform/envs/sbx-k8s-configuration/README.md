@@ -24,7 +24,6 @@ No resources.
 | <a name="input_acr_username"></a> [acr\_username](#input\_acr\_username) | Sets an ACR user name. | `string` | `"TBD"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
 | <a name="input_gitops_tool"></a> [gitops\_tool](#input\_gitops\_tool) | String determining whether to install Argo CD or FluxCD. Viable options: [ argocd, fluxcd ] | `string` | `"argocd"` | no |
-| <a name="input_k8s_namespace"></a> [k8s\_namespace](#input\_k8s\_namespace) | K8s gitops-ftw namespace. | `string` | `"gitops-ftw"` | no |
 
 ## Outputs
 
