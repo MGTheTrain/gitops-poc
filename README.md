@@ -95,8 +95,9 @@ argocd app sync nginx
 # In terminal process B - Monitor Application Status
 argocd app get nginx
 
-# (Optional) Check if the nginx service could be created properly 
-kubectl get sc -n gitops-ftw
+# Check if the nginx service could be created properly 
+kubectl get svc -n gitops-ftw
+# Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 The Argo CD application that has been registered and synchronized should resemble the following:
 
@@ -121,6 +122,10 @@ kubectl get gitrepositories -n gitops-ftw
 kubectl get kustomizations -n gitops-ftw
 # Describe customization
 kubectl describe kustomization nginx -n gitops-ftw
+
+# Check if the nginx service could be created properly 
+kubectl get svc -n gitops-ftw
+# Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
 (**NOTE:** Need to be further checked) Utilizing `flux` cli tool:
@@ -145,10 +150,11 @@ flux create kustomization nginx \
 --namespace=gitops-ftw
 
 # Check if the nginx service could be created properly 
-kubectl get sc -n gitops-ftw
+kubectl get svc -n gitops-ftw
+# Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
-Registered ArgoCD applications or FluxCD Kustomization manifests of [Github repository](https://github.com/MGTheTrain/helm-chart-samples-ftw) for the `main` branch will treat Helm charts and kustomization manifests as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
+Registered ArgoCD applications or FluxCD Kustomization manifests of [helm-chart-samples-ftw Github repository](https://github.com/MGTheTrain/helm-chart-samples-ftw) for the `HEAD of the main branch` will treat Helm charts and kustomization manifests as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
 
 ### Destroy the AKS or EKS cluster or uninstall helm charts
 
