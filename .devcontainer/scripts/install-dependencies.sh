@@ -24,3 +24,6 @@ tar -zxvf helm-v3.14.3-linux-amd64.tar.gz
 rm helm-v3.14.3-linux-amd64.tar.gz
 mv linux-amd64/helm /usr/local/bin/helm
 rm -rf linux-amd64
+
+# Kustomize
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
