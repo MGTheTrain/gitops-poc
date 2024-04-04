@@ -60,7 +60,7 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 ### Showcase GitOps
 
-#### Registering ArgoCD applications or Kustomization's
+#### Registering ArgoCD applications or Flux Kustomizations
 
 ##### Trough CLI for ArgoCD:
 
