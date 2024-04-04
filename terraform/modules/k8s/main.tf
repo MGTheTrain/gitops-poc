@@ -62,7 +62,6 @@ resource "helm_release" "nginx_ingress_controller" {
 
 resource "kubernetes_ingress_v1" "gitops_ftw_ingress" {
   wait_for_load_balancer = true
-  count                  = var.gitops_tool == "argocd" ? 1 : 0
   metadata {
     name        = "gitops-ftw-ingress"
     namespace   = kubernetes_namespace.gitops_ftw_namespace.metadata.0.name
