@@ -60,7 +60,7 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 ### Showcase GitOps
 
-#### Registering ArgoCD applications or Flux Kustomizations
+#### Registering ArgoCD applications or deploying Flux Kustomizations
 
 ##### Trough CLI for ArgoCD:
 
@@ -94,6 +94,9 @@ argocd app create nginx \
 argocd app sync nginx
 # In terminal process B - Monitor Application Status
 argocd app get nginx
+
+# (Optional) Check if the nginx service could be created properly 
+kubectl get sc -n gitops-ftw
 ```
 The Argo CD application that has been registered and synchronized should resemble the following:
 
@@ -106,7 +109,41 @@ The same applies for the internal `sample-service` helm chart
 ##### Trough CLI for FluxCD:
 
 ```sh
-TBD
+flux create kustomization nginx \
+--source=<GIT_REPO_URL> \
+--path="<PATH_IN_REPO>" \
+--prune=true \
+--interval=5m \
+--wait=true \
+--health-check-timeout=3m \
+--namespace=<NAMESPACE>
+
+flux create kustomization nginx \
+--source=https://github.com/MGTheTrain/helm-chart-samples-ftw.git/nginx \
+--path="./gitops/fluxcd/nginx/overlays/dev" \
+--prune=true \
+--interval=5m \
+--wait=true \
+--health-check-timeout=3m \
+--namespace=gitops-ftw
+
+# Check if the nginx service could be created properly 
+kubectl get sc -n gitops-ftw
+```
+
+(Optional) Utilizing `kubectl`:
+
+```sh
+# Precondition - `git clone git@github.com:MGTheTrain/helm-chart-samples-ftw.git`
+cd <some path>/helm-chart-samples-ftw/gitops/fluxcd/nginx/overlays/dev
+kubectl apply -f kustomization.yaml
+
+# See the source status
+kubectl get gitrepositories -n gitops-ftw
+# IMPORTANT - See the reconciliation status
+kubectl get kustomizations -n gitops-ftw
+# Describe customization
+kubectl describe kustomization nginx -n gitops-ftw
 ```
 
 ### Destroy the AKS or EKS cluster or uninstall helm charts
