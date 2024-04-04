@@ -13,7 +13,7 @@ Repository deploying an AKS or EKS cluster on demand, installing ArgoCD or Flux 
 ## Features
 
 - [x] AKS deployment trough terraform cli tool and HCL files. 
-- [ ] EKS deployment trough terraform cli tool and HCL files. 
+- [ ] ~~EKS deployment trough terraform cli tool and HCL iles.~~
 - [x] ArgoCD or Flux installations on deployed k8s cluster
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
 - [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS or EKS) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
@@ -60,9 +60,9 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 ### Showcase GitOps
 
-#### Registering ArgoCD applications or deploying Flux Kustomizations
+#### Registering ArgoCD applications or deploying FluxCD Kustomizations
 
-##### Trough CLI for ArgoCD:
+##### Trough CLI tools for registering and syncing ArgoCD applications:
 
 ```sh
 # Port forward in terminal process A
@@ -106,7 +106,24 @@ The Argo CD application that has been registered and synchronized should resembl
 
 The same applies for the internal `sample-service` helm chart
 
-##### Trough CLI for FluxCD:
+##### Trough CLI tools for deploying FluxCD Kustomizations:
+
+(Preferred) Utilizing `kubectl`:
+
+```sh
+# Precondition - `git clone git@github.com:MGTheTrain/helm-chart-samples-ftw.git`
+cd <some path>/helm-chart-samples-ftw/gitops/fluxcd/nginx/overlays/dev
+kubectl apply -f kustomization.yaml
+
+# See the source status
+kubectl get gitrepositories -n gitops-ftw
+# IMPORTANT - See the reconciliation status
+kubectl get kustomizations -n gitops-ftw
+# Describe customization
+kubectl describe kustomization nginx -n gitops-ftw
+```
+
+(**NOTE:** Need to be further checked) Utilizing `flux` cli tool:
 
 ```sh
 flux create kustomization nginx \
@@ -131,20 +148,7 @@ flux create kustomization nginx \
 kubectl get sc -n gitops-ftw
 ```
 
-(Optional) Utilizing `kubectl`:
-
-```sh
-# Precondition - `git clone git@github.com:MGTheTrain/helm-chart-samples-ftw.git`
-cd <some path>/helm-chart-samples-ftw/gitops/fluxcd/nginx/overlays/dev
-kubectl apply -f kustomization.yaml
-
-# See the source status
-kubectl get gitrepositories -n gitops-ftw
-# IMPORTANT - See the reconciliation status
-kubectl get kustomizations -n gitops-ftw
-# Describe customization
-kubectl describe kustomization nginx -n gitops-ftw
-```
+Registered ArgoCD applications or FluxCD Kustomization manifests of [Github repository](https://github.com/MGTheTrain/helm-chart-samples-ftw) for the `main` branch will treat Helm charts and kustomization manifests as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
 
 ### Destroy the AKS or EKS cluster or uninstall helm charts
 
