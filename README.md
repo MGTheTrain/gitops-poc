@@ -28,12 +28,12 @@ Github workflows will be utilized in [this](./.github/workflows/) and the [helm-
 
 0. **Optional:** Create an ACR trough the [terraform.yml workflow](https://github.com/MGTheTrain/helm-chart-samples/actions/workflows/terraform.yml)
 1. **Optional:** Build and push a sample service with release version tag to the ACR trough the [docker_image.yml workflow](https://github.com/MGTheTrain/helm-chart-samples/actions/workflows/docker_image.yml). 
-2. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
+2. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
 
 ### Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts
 
-0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. **NOTE:** `ACR_*` secrets for this workflow need to be resolved by copying over values of the deployed ACR from an Azure Portal UI.
-1. **Optional:** Install only helm charts to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-install`
+0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. **NOTE:** `ACR_*` secrets for this workflow need to be resolved by copying over values of the deployed ACR from an Azure Portal UI.
+1. **Optional:** Install only helm charts to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-install`
 
 **NOTE:** Set all the required Github secrets for aboves workflows
 
@@ -158,5 +158,5 @@ Registered ArgoCD applications or FluxCD Kustomization manifests of [helm-chart-
 
 ### Destroy the AKS ~~or EKS~~ cluster or uninstall helm charts
 
-0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
-1. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
+0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
+1. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
