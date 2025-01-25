@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - [x] Sample C# ASP.NET Core HelloWorld service along with a CI workflow for building and pushing the container image, including the build artifacts of the service, to an Azure Container Registry (ACR)
-- [x] Nginx helm charts and kustomization's required for GitOps
+- [x] Nginx and sample-service helm charts and kustomization's required for GitOps
 
 ## [0.1.0] - 01-04-2024
 

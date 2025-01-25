@@ -17,7 +17,7 @@ Repository deploying an AKS cluster on demand, installing ArgoCD or Flux on thos
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
 - [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
 - [x] Sample C# ASP.NET Core HelloWorld service along with a CI workflow for building and pushing the container image, including the build artifacts of the service, to an Azure Container Registry (ACR)
-- [x] Nginx helm charts and kustomization's required for GitOps
+- [x] Nginx and sample-service helm charts and kustomization's required for GitOps
 
 ## Getting started
 
