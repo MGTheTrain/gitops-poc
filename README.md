@@ -50,14 +50,14 @@ kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
 When checking for example the ArgoCD Web UI, you would run:
 
 ```sh
-kubectl port-forward -n gitops <argocd-server-pod> 8080:8080
+kubectl port-forward -n gitops-ftw <argocd-server-pod> 8080:8080
 ```
 
 and visit in a browser of choice `localhost:8080`. You would need to authenticate with admin credentials.
 
 ![argocd-web-ui.PNG](./images/argocd-web-ui.PNG)
 
-The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n gitops -o jsonpath="{.data.password}" | base64 -d`.
+The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n gitops-ftw -o jsonpath="{.data.password}" | base64 -d`
 
 ### Showcase GitOps
 
@@ -67,7 +67,7 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 ```sh
 # Port forward in terminal process A
-kubectl port-forward -n gitops <argocd-server-pod> 8080:8080
+kubectl port-forward -n gitops-ftw <argocd-server-pod> 8080:8080
 
 # In terminal process B - Login
 argocd login localhost:8080
@@ -97,7 +97,7 @@ argocd app sync nginx
 argocd app get nginx
 
 # Check if the nginx service could be created properly 
-kubectl get svc -n gitops
+kubectl get svc -n gitops-ftw
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 The Argo CD application that has been registered and synchronized should resemble the following:
@@ -118,14 +118,14 @@ cd <some path>/helm-chart-samples/gitops/fluxcd/nginx/overlays/dev
 kubectl apply -f kustomization.yaml
 
 # See the source status
-kubectl get gitrepositories -n gitops
+kubectl get gitrepositories -n gitops-ftw
 # IMPORTANT - See the reconciliation status
-kubectl get kustomizations -n gitops
+kubectl get kustomizations -n gitops-ftw
 # Describe customization
-kubectl describe kustomization nginx -n gitops
+kubectl describe kustomization nginx -n gitops-ftw
 
 # Check if the nginx service could be created properly 
-kubectl get svc -n gitops
+kubectl get svc -n gitops-ftw
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
@@ -151,7 +151,7 @@ flux create kustomization nginx \
 --namespace=gitops
 
 # Check if the nginx service could be created properly 
-kubectl get svc -n gitops
+kubectl get svc -n gitops-ftw
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
