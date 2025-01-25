@@ -8,21 +8,20 @@
 
 ## Summary
 
-Repository deploying an AKS ~~or EKS~~ cluster on demand, installing ArgoCD or Flux on those clusters enabling GitOps for custom helm charts
+Repository deploying an AKS cluster on demand, installing ArgoCD or Flux on those clusters enabling GitOps for custom helm charts
 
 ## Features
 
 - [x] AKS deployment trough terraform cli tool and HCL files. 
-- [ ] ~~EKS deployment trough terraform cli tool and HCL iles.~~
 - [x] ArgoCD or Flux installations on deployed k8s cluster
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
-- [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS ~~or EKS~~) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
+- [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
 - [x] Sample C# ASP.NET Core HelloWorld service along with a CI workflow for building and pushing the container image, including the build artifacts of the service, to an Azure Container Registry (ACR)
 - [x] Nginx helm charts and kustomization's required for GitOps
 
 ## Getting started
 
-Github workflows will be utilized in [this](./.github/workflows/). Required secrets need to be set therefore for this Github repository. Once the workflows described in the **Preconditions** and **Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
+Github workflows will be utilized in [this](./.github/workflows/). Required secrets need to be set therefore for this Github repository. Once the workflows described in the **Preconditions** and **Deploy an AKS cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
 
 ![deployed-rgs.PNG](./images/deployed-rgs.PNG)
 
@@ -32,7 +31,7 @@ Github workflows will be utilized in [this](./.github/workflows/). Required secr
 1. **Optional:** Build and push a sample service with version tag to the ACR trough the [build-and-push.yml workflow](./.github/workflows/build-and-push.yml). 
 2. Deploy an Azure Storage Account Service including container for terraform backends trough the [deploy.yml workflow](./.github/workflows/deploy.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
 
-### Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts
+### Deploy an AKS cluster and install the ArgoCD or FluxCD helm charts
 
 0. Deploy an AKS trough the [deploy.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. **NOTE:** `ACR_*` secrets for this workflow need to be resolved by copying over values of the deployed ACR from an Azure Portal UI.
 1. **Optional:** Install only helm charts to an existing kubernetes cluster trough [deploy.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-install`
@@ -158,7 +157,7 @@ kubectl get svc -n gitops
 
 Registered ArgoCD applications or FluxCD Kustomization manifests of [helm-chart-samples Github repository](https://github.com/MGTheTrain/helm-chart-samples) for the `HEAD of the main branch` will treat Helm charts and kustomization manifests as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
 
-### Destroy the AKS ~~or EKS~~ cluster or uninstall helm charts
+### Destroy the AKS cluster or uninstall helm charts
 
 0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [deploy.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
 1. Destroy an AKS trough the [deploy.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
