@@ -53,7 +53,7 @@ jobs:
       - name: Terraform Init
         run: terraform init 
         working-directory: ./devops/terraform/acr
-      - name: Deploy Storage Account backend
+      - name: Deploy Azure Container registry
         run: terraform apply --auto-approve # Resources need to be manually deleted in Azure Portal
         continue-on-error: false
         working-directory: ./devops/terraform/acr
