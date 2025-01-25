@@ -99,6 +99,14 @@ argocd app get nginx
 # Check if the nginx service could be created properly 
 kubectl get svc -n gitops-ftw
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
+
+# If an error appears in the ArgoCD Web UI while pulling Docker images try manually deleting and then recreating the Docker secret
+kubectl delete secret acr-secret -n gitops-ftw
+kubectl create secret docker-registry acr-secret --docker-server=<> --docker-username=<> --docker-password=<> n gitops-ftw
+
+# Some relatable links to the issue:
+# - https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret#example-usage-docker-config
+# - https://stackoverflow.com/questions/41203970/pull-image-azure-container-registry-kubernetes
 ```
 The Argo CD application that has been registered and synchronized should resemble the following:
 
