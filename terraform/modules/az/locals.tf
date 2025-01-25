@@ -3,7 +3,7 @@ locals {
     env         = "${var.environment}",
     team        = "${var.team}",
     owner       = "MGTheTrain",
-    project     = "helm-chart-samples-ftw",
+    project     = "gitops-poc",
     app-purpose = "Deployment of an AKS",
     Stage       = "${var.environment}"
   }

@@ -17,18 +17,20 @@ Repository deploying an AKS ~~or EKS~~ cluster on demand, installing ArgoCD or F
 - [x] ArgoCD or Flux installations on deployed k8s cluster
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
 - [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS ~~or EKS~~) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
+- [x] Sample C# ASP.NET Core HelloWorld service along with a CI workflow for building and pushing the container image, including the build artifacts of the service, to an Azure Container Registry (ACR)
+- [x] Nginx helm charts and kustomization's required for GitOps
 
 ## Getting started
 
-Github workflows will be utilized in [this](./.github/workflows/) and the [helm-chart-samples](https://github.com/MGTheTrain/helm-chart-samples/tree/main/.github/workflows) Github repository. Required secrets need to be set therefore for those Github repositories. Once the workflows described in the **Preconditions** and **Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
+Github workflows will be utilized in [this](./.github/workflows/). Required secrets need to be set therefore for this Github repository. Once the workflows described in the **Preconditions** and **Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
 
 ![deployed-rgs.PNG](./images/deployed-rgs.PNG)
 
 ### Preconditions
 
-0. **Optional:** Create an ACR trough the [terraform.yml workflow](https://github.com/MGTheTrain/helm-chart-samples/actions/workflows/terraform.yml)
-1. **Optional:** Build and push a sample service with release version tag to the ACR trough the [docker_image.yml workflow](https://github.com/MGTheTrain/helm-chart-samples/actions/workflows/docker_image.yml). 
-2. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
+0. **Optional:** Create an ACR trough the [terraform.yml workflow](./.github/workflows/terraform.yml)
+1. **Optional:** Build and push a sample service with release version tag to the ACR trough the [docker-build-and-push.yml workflow](./.github/workflows/docker-build-and-push.yml). 
+2. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](./.github/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
 
 ### Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts
 
@@ -83,7 +85,7 @@ argocd app create nginx \
 
 # e.g. for nginx chart
 argocd app create nginx \
-  --repo https://github.com/MGTheTrain/helm-chart-samples.git \
+  --repo https://github.com/MGTheTrain/gitops-poc.git \
   --path gitops/argocd/nginx \ 
   --dest-server https://kubernetes.default.svc \
   --dest-namespace gitops \
@@ -112,7 +114,7 @@ The same applies for the internal `sample-service` helm chart
 (Preferred) Utilizing `kubectl`:
 
 ```sh
-# Precondition - `git clone git@github.com:MGTheTrain/helm-chart-samples.git`
+# Precondition - `git clone git@github.com:MGTheTrain/gitops-poc.git`
 cd <some path>/helm-chart-samples/gitops/fluxcd/nginx/overlays/dev
 kubectl apply -f kustomization.yaml
 
@@ -141,7 +143,7 @@ flux create kustomization nginx \
 --namespace=<NAMESPACE>
 
 flux create kustomization nginx \
---source=https://github.com/MGTheTrain/helm-chart-samples.git/nginx \
+--source=https://github.com/MGTheTrain/gitops-poc.git/nginx \
 --path="./gitops/fluxcd/nginx/overlays/dev" \
 --prune=true \
 --interval=5m \
