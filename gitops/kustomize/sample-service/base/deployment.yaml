@@ -22,7 +22,7 @@ spec:
       containers:
         - name: sample-service
           securityContext: {}
-          image: "gftfbesbxacr001.azurecr.io/sample-service:0.1.0"
+          image: "hcsfsbxsa001.azurecr.io/sample-service:0.1.0"
           imagePullPolicy: "IfNotPresent"
           ports:
             - name: http
