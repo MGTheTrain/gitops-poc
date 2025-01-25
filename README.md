@@ -155,7 +155,7 @@ kubectl get svc -n gitops
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
-Registered ArgoCD applications or FluxCD Kustomization manifests of [helm-chart-samples Github repository](https://github.com/MGTheTrain/helm-chart-samples) for the `HEAD of the main branch` will treat Helm charts and kustomization manifests as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
+Registered [ArgoCD applications or FluxCD Kustomization manifests](./gitops/) will treat Helm charts and kustomization manifests for the `HEAD of this repos main branch` as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
 
 ### Destroy the AKS cluster or uninstall helm charts
 
