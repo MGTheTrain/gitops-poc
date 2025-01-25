@@ -8,32 +8,33 @@
 
 ## Summary
 
-Repository deploying an AKS ~~or EKS~~ cluster on demand, installing ArgoCD or Flux on those clusters enabling GitOps for custom helm charts or kustomizations
+Repository deploying an AKS cluster on demand, installing ArgoCD or Flux on those clusters enabling GitOps for custom helm charts
 
 ## Features
 
 - [x] AKS deployment trough terraform cli tool and HCL files. 
-- [ ] ~~EKS deployment trough terraform cli tool and HCL iles.~~
 - [x] ArgoCD or Flux installations on deployed k8s cluster
 - [x] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
-- [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS ~~or EKS~~) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
+- [x] CD wofklow for on demand deployments of k8s clusters (Options: AKS) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
+- [x] Sample C# ASP.NET Core HelloWorld service along with a CI workflow for building and pushing the container image, including the build artifacts of the service, to an Azure Container Registry (ACR)
+- [x] Nginx helm charts and kustomization's required for GitOps
 
 ## Getting started
 
-Github workflows will be utilized in [this](./.github/workflows/) and the [helm-chart-and-kustomization-samples](https://github.com/MGTheTrain/helm-chart-and-kustomization-samples/tree/main/.github/workflows) Github repository. Required secrets need to be set therefore for those Github repositories. Once the workflows described in the **Preconditions** and **Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
+Github workflows will be utilized in [this](./.github/workflows/). Required secrets need to be set therefore for this Github repository. Once the workflows described in the **Preconditions** and **Deploy an AKS cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
 
 ![deployed-rgs.PNG](./images/deployed-rgs.PNG)
 
 ### Preconditions
 
-0. **Optional:** Create an ACR trough the [terraform.yml workflow](https://github.com/MGTheTrain/helm-chart-and-kustomization-samples/actions/workflows/terraform.yml)
-1. **Optional:** Build and push a sample service with release version tag to the ACR trough the [docker_image.yml workflow](https://github.com/MGTheTrain/helm-chart-and-kustomization-samples/actions/workflows/docker_image.yml). 
-2. Deploy an Azure Storage Account Service including container for terraform backends trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
+0. **Optional:** Create an ACR trough the [deploy-or-destroy workflow](./.github/workflows/deploy-or-destroy)
+1. **Optional:** Build and push a sample service with version tag to the ACR trough the [build-and-push.yml workflow](./.github/workflows/build-and-push.yml). 
+2. Deploy an Azure Storage Account Service including container for terraform backends trough the [deploy-or-destroy workflow](./.github/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
 
-### Deploy an AKS ~~or EKS~~ cluster and install the ArgoCD or FluxCD helm charts
+### Deploy an AKS cluster and install the ArgoCD or FluxCD helm charts
 
-0. Deploy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. **NOTE:** `ACR_*` secrets for this workflow need to be resolved by copying over values of the deployed ACR from an Azure Portal UI.
-1. **Optional:** Install only helm charts to an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-install`
+0. Deploy an AKS trough the [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. **NOTE:** `ACR_*` secrets for this workflow need to be resolved by copying over values of the deployed ACR from an Azure Portal UI.
+1. **Optional:** Install only helm charts to an existing kubernetes cluster trough [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-install`
 
 **NOTE:** Set all the required Github secrets for aboves workflows
 
@@ -83,7 +84,7 @@ argocd app create nginx \
 
 # e.g. for nginx chart
 argocd app create nginx \
-  --repo https://github.com/MGTheTrain/helm-chart-and-kustomization-samples.git \
+  --repo https://github.com/MGTheTrain/gitops-poc.git \
   --path gitops/argocd/nginx \ 
   --dest-server https://kubernetes.default.svc \
   --dest-namespace gitops \
@@ -112,8 +113,8 @@ The same applies for the internal `sample-service` helm chart
 (Preferred) Utilizing `kubectl`:
 
 ```sh
-# Precondition - `git clone git@github.com:MGTheTrain/helm-chart-and-kustomization-samples.git`
-cd <some path>/helm-chart-and-kustomization-samples/gitops/fluxcd/nginx/overlays/dev
+# Precondition - `git clone git@github.com:MGTheTrain/gitops-poc.git`
+cd <some path>/helm-chart-samples/gitops/fluxcd/nginx/overlays/dev
 kubectl apply -f kustomization.yaml
 
 # See the source status
@@ -141,7 +142,7 @@ flux create kustomization nginx \
 --namespace=<NAMESPACE>
 
 flux create kustomization nginx \
---source=https://github.com/MGTheTrain/helm-chart-and-kustomization-samples.git/nginx \
+--source=https://github.com/MGTheTrain/gitops-poc.git/nginx \
 --path="./gitops/fluxcd/nginx/overlays/dev" \
 --prune=true \
 --interval=5m \
@@ -154,9 +155,9 @@ kubectl get svc -n gitops
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
-Registered ArgoCD applications or FluxCD Kustomization manifests of [helm-chart-and-kustomization-samples Github repository](https://github.com/MGTheTrain/helm-chart-and-kustomization-samples) for the `HEAD of the main branch` will treat Helm charts and kustomization manifests as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
+Registered [ArgoCD applications or FluxCD Kustomization manifests](./gitops/) will treat Helm charts and kustomization manifests for the `HEAD of this repos main branch` as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
 
-### Destroy the AKS ~~or EKS~~ cluster or uninstall helm charts
+### Destroy the AKS cluster or uninstall helm charts
 
-0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
-1. Destroy an AKS trough the [terraform.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/terraform.yml) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
+0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
+1. Destroy an AKS trough the [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`

@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [x] Sample C# ASP.NET Core HelloWorld service along with a CI workflow for building and pushing the container image, including the build artifacts of the service, to an Azure Container Registry (ACR)
+- [x] Nginx helm charts and kustomization's required for GitOps
 
 ## [0.1.0] - 01-04-2024
 
@@ -15,3 +17,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Feature] ArgoCD or Flux installations on deployed k8s cluster
 - [Feature] CD wofklow for on demand deployments of an Azure Storage Account Container (**For storing terraform state files**)
 - [Feature] CD wofklow for on demand deployments of k8s clusters (Options: AKS or EKS) and installation of GitOps tools (Options: ArgoCD or Flux) or destruction of k8s clusters trough Github `workflow_dispatch` trigger (**Requires an Azure Storage Account Container**)
+- [x] CD wofklow for on demand deployments of an ACR (**Required for storing docker images**)

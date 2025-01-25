@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-app
+  namespace: gitops-ftw
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MGTheTrain/gitops-poc.git
+    path: ./gitops/helm/nginx/
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: gitops-ftw
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
