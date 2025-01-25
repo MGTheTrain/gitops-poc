@@ -29,7 +29,7 @@ No resources.
 | <a name="input_number_of_aks"></a> [number\_of\_aks](#input\_number\_of\_aks) | The total number of AKses to deploy. | `number` | `1` | no |
 | <a name="input_resource_instance_number"></a> [resource\_instance\_number](#input\_resource\_instance\_number) | The resource instance number. | `string` | `"001"` | no |
 | <a name="input_team"></a> [team](#input\_team) | The team used for tagging resource groups and resources. | `string` | `"MG Innovators"` | no |
-| <a name="input_virtual_network_address_space"></a> [virtual\_network\_address\_space](#input\_virtual\_network\_address\_space) | The virtual network address space. E.g. 2^(32-16)=65536 private ips in Vnet. | `list(string)` | <pre>[<br>  "10.1.0.0/16"<br>]</pre> | no |
+| <a name="input_virtual_network_address_space"></a> [virtual\_network\_address\_space](#input\_virtual\_network\_address\_space) | The virtual network address space. E.g. 2^(32-16)=65536 private ips in Vnet. | `list(string)` | <pre>[<br/>  "10.1.0.0/16"<br/>]</pre> | no |
 
 ## Outputs
 

@@ -13,12 +13,27 @@ NC='\033[0m'
 echo "#####################################################################################################"
 echo -e "$BLUE INFO: $NC About to auto-format hcl files and generate docs for hcl files"
 
-TF_ENVS_FOLDER="./terraform/envs"
-TF_MODULES_FOLDER="./terraform/modules"
-DEVOPS_TERRAFORM_ACR_FOLDER="./devops/terraform/acr"
-DEVOPS_TERRAFORM_BACKEND_FOLDER="./devops/terraform/tf-backend"
-for dir in ${TF_ENVS_FOLDER}/sbx-k8s-deployment ${TF_ENVS_FOLDER}/sbx-k8s-configuration ${TF_MODULES_FOLDER}/az ${TF_MODULES_FOLDER}/aws ${TF_MODULES_FOLDER}/k8s ${DEVOPS_TERRAFORM_ACR_FOLDER} ${DEVOPS_TERRAFORM_BACKEND_FOLDER}; do
-  terraform-docs markdown table --output-file README.md --hide providers --output-mode replace "$dir"
+folders=(
+  "./devops/terraform/acr"
+  "./devops/terraform/tf-backend"
+)
+
+for folder in "${folders[@]}"; do
+  terraform-docs markdown table --output-file README.md --hide providers --output-mode replace "$folder"
+done
+
+# Define the parent directories
+folders=(
+  "./terraform/envs/"
+  "./terraform/modules/"
+)
+
+for parent_folder in "${folders[@]}"; do
+  for folder in "$parent_folder"*/; do
+    if [ -d "$folder" ]; then
+      terraform-docs markdown table --output-file README.md --hide providers --output-mode replace "$folder"
+    fi
+  done
 done
 
 terraform fmt -recursive .
