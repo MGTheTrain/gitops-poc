@@ -154,7 +154,7 @@ kubectl get svc -n gitops-ftw
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
-Registered [ArgoCD applications or FluxCD Kustomization manifests](./gitops/) will treat Helm charts and kustomization manifests for the `HEAD of this repos main branch` as the sole source of truth within the Kubernetes cluster. Any changes made will be synchronized with the Kubernetes cluster trough the **Sync Controllers** accordingly.
+Registered [ArgoCD applications or FluxCD Kustomizations](./gitops/) of the `HEAD of this repo's main branch` will be treated as the sole source of truth within the Kubernetes cluster, with the reconciliation loop ensuring that the desired state matches the cluster's actual state through Kubernetes controllers.
 
 ### Destroy the AKS cluster or uninstall helm charts
 
