@@ -58,14 +58,14 @@ resource "azurerm_kubernetes_cluster" "this" {
   count               = var.number_of_aks
 
   default_node_pool {
-    name                = "${var.digital_product_affix}${count.index}"
-    node_count          = var.aks_node_count
-    vm_size             = var.aks_vm_size
-    os_disk_size_gb     = var.aks_os_disk_size_gb
-    enable_auto_scaling = var.aks_enable_auto_scaling
-    min_count           = var.aks_node_count
-    max_count           = var.aks_max_node_count
-    vnet_subnet_id      = azurerm_subnet.this[count.index].id
+    name                 = "${var.digital_product_affix}${count.index}"
+    node_count           = var.aks_node_count
+    vm_size              = var.aks_vm_size
+    os_disk_size_gb      = var.aks_os_disk_size_gb
+    auto_scaling_enabled = var.aks_enable_auto_scaling
+    min_count            = var.aks_node_count
+    max_count            = var.aks_max_node_count
+    vnet_subnet_id       = azurerm_subnet.this[count.index].id
   }
 
   linux_profile {
