@@ -113,8 +113,7 @@ The same applies for the internal `sample-service` helm chart
 (Preferred) Utilizing `kubectl`:
 
 ```sh
-# Precondition - `git clone git@github.com:MGTheTrain/gitops-poc.git`
-cd <some path>/helm-chart-samples/gitops/fluxcd/nginx/overlays/dev
+cd gitops/fluxcd/nginx/overlays/dev
 kubectl apply -f kustomization.yaml
 
 # See the source status
