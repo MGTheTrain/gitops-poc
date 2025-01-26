@@ -28,3 +28,14 @@ variable "gitops_tool" {
   type        = string
   default     = "argocd"
 }
+
+variable "selected_configuration" {
+  description = "String that specifies whether to deploy external Helm charts or internal resources, such as Kubernetes secrets or a reverse proxy ingress required for applications in the k8s cluster. Viable options: [ internal, external-helm ]"
+  type        = string
+  default     = "external-helm"
+
+  validation {
+    condition     = var.selected_configuration == "internal" || var.selected_configuration == "external-helm"
+    error_message = "selected_configuration must be either 'internal' or 'external-helm'"
+  }
+}

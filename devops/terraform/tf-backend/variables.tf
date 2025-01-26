@@ -11,8 +11,8 @@ variable "environment" {
   type        = string
 
   validation {
-    condition     = can(regex("^(sbx|dev|qas|prd)$", var.environment))
-    error_message = "Invalid input, options: \"sbx\", \"dev\", \"qas\", \"prd\"."
+    condition     = can(regex("^(sbx|dev|qas|staging|prd)$", var.environment))
+    error_message = "Invalid input, options: \"sbx\", \"dev\", \"qas\", \"staging\", \"prd\"."
   }
 }
 

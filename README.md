@@ -27,14 +27,15 @@ Github workflows will be utilized in [this](./.github/workflows/). Required secr
 
 ### Preconditions
 
-0. **Optional:** Create an ACR trough the [deploy-or-destroy workflow](./.github/workflows/deploy-or-destroy)
-1. **Optional:** Build and push a sample service with version tag to the ACR trough the [build-and-push.yml workflow](./.github/workflows/build-and-push.yml). 
-2. Deploy an Azure Storage Account Service including container for terraform backends trough the [deploy-or-destroy workflow](./.github/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option storage-account-backend-deploy`
+0. **Optional:** Create an ACR trough the [deploy-container-registry workflow](./.github/workflows/deploy-container-registry)
+1. **Optional:** Build and push a sample service with version tag to the ACR trough the [build-and-push-docker.yml workflow](./.github/workflows/build-and-push-docker.yml). 
+2. Deploy an Azure Storage Account Service including container for terraform backends trough the [deploy-tf-backend workflow](./.github/workflows/deploy-tf-backend)
 
-### Deploy an AKS cluster and install the ArgoCD or FluxCD helm charts
+### Deploy an AKS cluster, install ArgoCD or FluxCD helm charts or setup kubernetes resources for applications
 
-0. Deploy an AKS trough the [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-deploy`. **NOTE:** `ACR_*` secrets for this workflow need to be resolved by copying over values of the deployed ACR from an Azure Portal UI.
-1. **Optional:** Install only helm charts to an existing kubernetes cluster trough [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-install`
+0. Deploy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-k8s-cluster). 
+1. **Optional:** Install external helm charts into the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts)
+2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources)
 
 **NOTE:** Set all the required Github secrets for aboves workflows
 
@@ -50,24 +51,24 @@ kubectl port-forward -n <namespace>  <pod-name> <local-port>:<server-port>
 When checking for example the ArgoCD Web UI, you would run:
 
 ```sh
-kubectl port-forward -n gitops-ftw <argocd-server-pod> 8080:8080
+kubectl port-forward -n external-services <argocd-server-pod> 8080:8080
 ```
 
 and visit in a browser of choice `localhost:8080`. You would need to authenticate with admin credentials.
 
 ![argocd-web-ui.PNG](./images/argocd-web-ui.PNG)
 
-The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n gitops-ftw -o jsonpath="{.data.password}" | base64 -d`
+The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n internal-apps -o jsonpath="{.data.password}" | base64 -d`
 
 ### Showcase GitOps
 
-#### Registering ArgoCD applications or deploying FluxCD Kustomizations
+#### ArgoCD applications
 
-##### Trough CLI tools for registering and syncing ArgoCD applications:
+In order to register ArogCD applications run:
 
 ```sh
 # Port forward in terminal process A
-kubectl port-forward -n gitops-ftw <argocd-server-pod> 8080:8080
+kubectl port-forward -n external-services <argocd-server-pod> 8080:8080
 
 # In terminal process B - Login
 argocd login localhost:8080
@@ -97,11 +98,11 @@ argocd app sync nginx
 argocd app get nginx
 
 # Check if the nginx service could be created properly 
-kubectl get svc -n gitops-ftw
+kubectl get svc -n internal-apps
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 
 # If an error appears in the ArgoCD Web UI while pulling Docker images try manually deleting and then recreating the Docker secret
-kubectl delete secret acr-secret -n gitops-ftw
+kubectl delete secret acr-secret -n internal-apps
 kubectl create secret docker-registry acr-secret --docker-server=<> --docker-username=<> --docker-password=<> n gitops-ftw
 
 # Some relatable links to the issue:
@@ -116,27 +117,27 @@ The Argo CD application that has been registered and synchronized should resembl
 
 The same applies for the internal `sample-service` helm chart
 
-##### Trough CLI tools for deploying FluxCD Kustomizations:
+##### FluxCD Kustomizations
 
-(Preferred) Utilizing `kubectl`:
+In order to deploy FluxCD Kustomizations run:
 
 ```sh
 cd gitops/fluxcd/nginx/overlays/dev
 kubectl apply -f kustomization.yaml
 
 # See the source status
-kubectl get gitrepositories -n gitops-ftw
+kubectl get gitrepositories -n internal-apps
 # IMPORTANT - See the reconciliation status
-kubectl get kustomizations -n gitops-ftw
+kubectl get kustomizations -n internal-apps
 # Describe customization
-kubectl describe kustomization nginx -n gitops-ftw
+kubectl describe kustomization nginx -n internal-apps
 
 # Check if the nginx service could be created properly 
-kubectl get svc -n gitops-ftw
+kubectl get svc -n internal-apps
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
-(**NOTE:** Need to be further checked) Utilizing `flux` cli tool:
+or utilize `flux` cli tool (**NOTE:** Need to be further checked):
 
 ```sh
 flux create kustomization nginx \
@@ -158,7 +159,7 @@ flux create kustomization nginx \
 --namespace=gitops
 
 # Check if the nginx service could be created properly 
-kubectl get svc -n gitops-ftw
+kubectl get svc -n internal-apps
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
@@ -166,5 +167,6 @@ Registered [ArgoCD applications or FluxCD Kustomizations](./gitops/) of the `HEA
 
 ### Destroy the AKS cluster or uninstall helm charts
 
-0. **Optional:** Uninstall only helm charts of an existing kubernetes cluster trough [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option helm-charts-uninstall`
-1. Destroy an AKS trough the [deploy-or-destroy workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-or-destroy) considering the `INFRASTRUCTURE_OPERATIONS option k8s-service-destroy`
+0. **Optional:** Uninstall external helm charts of the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts)
+1. Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources)
+2. Destroy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-k8s-cluster)
