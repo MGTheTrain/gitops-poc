@@ -1,4 +1,4 @@
-name: Manage (deploy or destroy) k8s cluster to a cloud provider
+name: Manage/deploy or destroy an k8s cluster to a cloud provider
 
 on:
   workflow_dispatch:
