@@ -23,7 +23,7 @@ env:
 jobs:
   deploy-k8s-resources:
     runs-on: ubuntu-latest
-    if: inputs.INFRASTRUCTURE_OPERATION == 'deploy-k8s-resources'
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'deploy-k8s-resources' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -70,7 +70,7 @@ jobs:
 
   uninstall-helm-charts:
     runs-on: ubuntu-latest
-    if: inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-resources'
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-resources' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master

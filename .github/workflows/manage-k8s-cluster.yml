@@ -23,7 +23,7 @@ env:
 jobs:
 
   deploy-k8s:
-    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'deploy-k8s-service'
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'deploy-k8s-service' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -48,7 +48,7 @@ jobs:
         working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
   
   destroy-k8s:
-    if: inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-service' }}
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-service' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

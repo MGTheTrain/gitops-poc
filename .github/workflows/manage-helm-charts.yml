@@ -28,7 +28,7 @@ env:
 jobs:
   install-helm-charts:
     runs-on: ubuntu-latest
-    if: inputs.INFRASTRUCTURE_OPERATION == 'install-helm-charts'
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'install-helm-charts' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -73,7 +73,7 @@ jobs:
 
   uninstall-helm-charts:
     runs-on: ubuntu-latest
-    if: inputs.INFRASTRUCTURE_OPERATION == 'uninstall-helm-charts'
+    if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'uninstall-helm-charts' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@master
