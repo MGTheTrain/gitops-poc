@@ -1,5 +1,5 @@
 variable "digital_product_affix" {
-  default     = "gitopsftw"
+  default     = "gopocci"
   description = "The digital product affix."
   type        = string
 }
