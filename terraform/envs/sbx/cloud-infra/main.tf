@@ -1,5 +1,5 @@
 module "az" {
-  source                        = "../../modules/az"
+  source                        = "../../../modules/az"
   digital_product_affix         = var.digital_product_affix
   environment                   = var.environment
   resource_instance_number      = var.resource_instance_number
@@ -16,6 +16,6 @@ module "az" {
 }
 
 # module "aws" {
-#   source = "../../modules/aws"
+#   source = "../../../modules/aws"
 #   environment = "sbx"
 # }
