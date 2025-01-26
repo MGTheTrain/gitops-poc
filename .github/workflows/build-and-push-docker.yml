@@ -7,6 +7,10 @@ on:
         required: true
         default: "0.1.0"
         description: "The docker image tag"
+      DOCKER_FILE_PATH:
+        required: true
+        default: "./sample-service/src/HelloWorldService"
+        description: "Path to the docker file"
       ACR_LOGIN_SERVER:
         description: 'Azure Container Registry login server'
         required: true
@@ -44,7 +48,7 @@ jobs:
         shell: bash
         run: |
           docker build -t ${{ inputs.ACR_LOGIN_SERVER }}/sample-service:${{ inputs.DOCKER_IMAGE_TAG }} .
-        working-directory: ./sample-service/src/HelloWorldService
+        working-directory: ${{ inputs.DOCKER_FILE_PATH }}
 
       - name: Push docker image 🐳/📦
         shell: bash

@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nginx-app
-  namespace: gitops-ftw
+  namespace: internal-apps
 spec:
   project: default
   source:
@@ -11,7 +11,7 @@ spec:
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: gitops-ftw
+    namespace: internal-apps
   syncPolicy:
     automated:
       prune: true

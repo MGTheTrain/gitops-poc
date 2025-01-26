@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Updated
+
+- Separated concerns by distinguishing between the installation of external Helm charts and the Kubernetes resources needed by applications in a deployed cluster. Additionally split GitHub Action workflows and incorporated conditionals based on the selected `INFRASTRUCTURE_OPERATION` at the job level
+
 ## [0.2.0] - 25-01-2025
 
 ### Added
