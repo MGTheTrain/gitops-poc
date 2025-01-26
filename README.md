@@ -89,7 +89,7 @@ argocd app create nginx \
   --repo https://github.com/MGTheTrain/gitops-poc.git \
   --path gitops/argocd/nginx \ 
   --dest-server https://kubernetes.default.svc \
-  --dest-namespace gitops \
+  --dest-namespace internal-apps \
   --revision main \
   --server localhost:8080
 
