@@ -93,6 +93,11 @@ argocd app create nginx \
   --revision main \
   --server localhost:8080
 
+# In terminal process B - Sync Application
+argocd app sync nginx
+# In terminal process B - Monitor Application Status
+argocd app get nginx
+
 # e.g. sample service
 argocd app create sample-service \
   --repo https://github.com/MGTheTrain/gitops-poc.git \
@@ -103,9 +108,9 @@ argocd app create sample-service \
   --server localhost:8080
 
 # In terminal process B - Sync Application
-argocd app sync nginx
+argocd app sync sample-service
 # In terminal process B - Monitor Application Status
-argocd app get nginx
+argocd app get sample-service
 
 # Check if the nginx service could be created properly 
 kubectl get svc -n internal-apps
