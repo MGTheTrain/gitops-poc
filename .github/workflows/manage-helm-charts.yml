@@ -12,12 +12,12 @@ on:
         type: choice
         options: [ 'argocd', 'fluxcd' ]
         default: 
-        description: 'Select GitOps tool: [ argocd, fluxcd ]'
+        description: 'Select GitOps tool'
       ENVIRONMENT:
         type: choice
         options: [ 'sbx' ]
         default: sbx
-        description: 'Environment on which to deploy: [ sbx ]. Dev, staging, prod environments not considered'
+        description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
 
 env:
   ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'

@@ -12,7 +12,7 @@ on:
         type: choice
         options: [ 'sbx' ]
         default: sbx
-        description: 'Environment on which to deploy. Dev, staging, prod environments not considered'
+        description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
 
 env:
   ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
