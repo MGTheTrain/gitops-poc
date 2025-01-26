@@ -24,7 +24,11 @@ done
 
 # Define the parent directories
 folders=(
-  "./terraform/envs/"
+  "./terraform/envs/sbx/"
+  "./terraform/envs/dev/"
+  "./terraform/envs/qas/"
+  "./terraform/envs/staging/"
+  "./terraform/envs/prd/"
   "./terraform/modules/"
 )
 

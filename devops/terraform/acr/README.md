@@ -22,7 +22,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_acr_admin_enabled"></a> [acr\_admin\_enabled](#input\_acr\_admin\_enabled) | Flag to enable admin user for the Azure Container Registry | `bool` | `true` | no |
 | <a name="input_acr_sku"></a> [acr\_sku](#input\_acr\_sku) | SKU for the Azure Container Registry | `string` | `"Basic"` | no |
-| <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix. | `string` | `"hcsf"` | no |
+| <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix. | `string` | `"gopocacr"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
 | <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"West Europe"` | no |
 | <a name="input_number_of_container_registries"></a> [number\_of\_container\_registries](#input\_number\_of\_container\_registries) | The total number of Azure Container registries to deploy. | `number` | `1` | no |
