@@ -65,7 +65,7 @@ The default username is `admin`. The default password can be obtained trough: `k
 
 #### ArgoCD applications
 
-In order to register ArogCD applications run:
+In order to register and sync ArogCD applications run:
 
 ```sh
 # Port forward in terminal process A
