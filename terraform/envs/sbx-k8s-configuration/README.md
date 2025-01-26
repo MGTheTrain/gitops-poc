@@ -29,8 +29,5 @@ No resources.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_external_services_namespace"></a> [external\_services\_namespace](#output\_external\_services\_namespace) | n/a |
-| <a name="output_internal_apps_namespace"></a> [internal\_apps\_namespace](#output\_internal\_apps\_namespace) | n/a |
+No outputs.
 <!-- END_TF_DOCS -->
