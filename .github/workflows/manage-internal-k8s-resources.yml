@@ -48,13 +48,13 @@ jobs:
           -backend-config="storage_account_name=gftfbesbxsa001" \
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}-k8s-deployment/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
 
             terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
             mkdir -vp ~/.kube
             head -n -3 ./config > ~/.kube/config
             cat ~/.kube/config
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
 
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
         run: |
@@ -63,19 +63,18 @@ jobs:
           -backend-config="storage_account_name=gftfbesbxsa001" \
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
-          -backend-config="${{ inputs.ENVIRONMENT }}-k8s-configuration-for-internal-apps/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-configuration
+          -backend-config="${{ inputs.ENVIRONMENT }}/k8s-internal/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal
 
       - name: Deploy application k8s resources 
         shell: bash
         run: terraform apply --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-configuration
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal
         env:
           TF_VAR_acr_username: "${{ inputs.ACR_USERNAME }}"
           TF_VAR_acr_password: "${{ inputs.ACR_PASSWORD }}"
           TF_VAR_acr_login_server_name: "${{ inputs.ACR_LOGIN_SERVER }}"
-          TF_VAR_selected_configuration: internal
 
   destroy-k8s-resources:
     runs-on: ubuntu-latest
@@ -95,13 +94,13 @@ jobs:
           -backend-config="storage_account_name=gftfbesbxsa001" \
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}-k8s-deployment/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
 
           terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
           mkdir -vp ~/.kube
           head -n -3 ./config > ~/.kube/config
           cat ~/.kube/config
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
 
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
         run: |
@@ -110,12 +109,10 @@ jobs:
           -backend-config="storage_account_name=gftfbesbxsa001" \
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
-          -backend-config="${{ inputs.ENVIRONMENT }}-k8s-configuration-for-internal-apps/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-configuration
+          -backend-config="${{ inputs.ENVIRONMENT }}/k8s-internal/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal
 
       - name: Destroy application k8s resources
         run: terraform destroy --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-configuration
-        env:
-          TF_VAR_selected_configuration: internal
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal

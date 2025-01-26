@@ -39,13 +39,13 @@ jobs:
           -backend-config="storage_account_name=gftfbesbxsa001" \
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}-k8s-deployment/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
 
       - name: Deploy Kubernetes service and related resources
         run: terraform apply --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
   
   destroy-k8s:
     if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-service' }}
@@ -64,10 +64,10 @@ jobs:
           -backend-config="storage_account_name=gftfbesbxsa001" \
           -backend-config="resource_group_name=gftfbe-sbx-rg001" \
           -backend-config="container_name=gftfbesbxsac001" \
-          -backend-config="key=${{ inputs.ENVIRONMENT }}-k8s-deployment/terraform.tfstate"
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/cloud-infra/terraform.tfstate"
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
 
       - name: Destroy Kubernetes service and related resources
         run: terraform destroy --auto-approve
         continue-on-error: false
-        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
+        working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
