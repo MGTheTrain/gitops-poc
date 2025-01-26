@@ -112,7 +112,7 @@ argocd app sync sample-service
 # In terminal process B - Monitor Application Status
 argocd app get sample-service
 
-# If an error appears in the ArgoCD Web UI while pulling Docker images or the sample service try manually deleting and then recreating the Docker secret
+# If an error appears in the ArgoCD Web UI while pulling Docker images for the sample service try manually deleting and then recreating the Docker secret
 kubectl delete secret acr-secret -n internal-apps
 kubectl create secret docker-registry acr-secret --docker-server=<> --docker-username=<> --docker-password=<> -n internal-apps
 
