@@ -77,7 +77,7 @@ jobs:
           TF_VAR_acr_login_server_name: "${{ inputs.ACR_LOGIN_SERVER }}"
           TF_VAR_selected_configuration: internal
 
-  uninstall-helm-charts:
+  destroy-k8s-resources:
     runs-on: ubuntu-latest
     if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-resources' }}
     steps:
