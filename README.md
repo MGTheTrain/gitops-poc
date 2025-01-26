@@ -189,7 +189,7 @@ kubectl get svc -n internal-apps
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 
-Registered [ArgoCD applications or FluxCD Kustomizations](./gitops/) of the `HEAD of this repo's main branch` will be treated as the sole source of truth within the Kubernetes cluster, with the reconciliation loop ensuring that the desired state matches the cluster's actual state through Kubernetes controllers.
+Registered [ArgoCD applications or FluxCD Kustomizations](./gitops/) will be treated as the sole source of truth within the Kubernetes cluster for the `latest commit on this Github repositories main branch`, with the reconciliation loop ensuring that the desired state described within Kubernetes manifests matches the cluster's actual state through Kubernetes controllers.
 
 ### Destroy the AKS cluster, uninstall helm charts or remove kubernetes resources for applications
 
