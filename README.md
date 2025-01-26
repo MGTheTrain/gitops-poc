@@ -124,7 +124,7 @@ kubectl create secret docker-registry acr-secret --docker-server=<> --docker-use
 kubectl get svc -n internal-apps
 # Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
-The Argo CD applications that has been registered and synchronized should resemble the following:
+The ArgoCD applications that has been registered and synchronized should resemble the following:
 
 ![argocd-applications.jpg](./images/argocd-applications.jpg)
 
