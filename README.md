@@ -112,17 +112,17 @@ argocd app sync sample-service
 # In terminal process B - Monitor Application Status
 argocd app get sample-service
 
-# Check if the nginx service could be created properly 
-kubectl get svc -n internal-apps
-# Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
-
-# If an error appears in the ArgoCD Web UI while pulling Docker images try manually deleting and then recreating the Docker secret
+# If an error appears in the ArgoCD Web UI while pulling Docker images or the sample service try manually deleting and then recreating the Docker secret
 kubectl delete secret acr-secret -n internal-apps
 kubectl create secret docker-registry acr-secret --docker-server=<> --docker-username=<> --docker-password=<> -n internal-apps
 
 # Some relatable links to the issue:
 # - https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret#example-usage-docker-config
 # - https://stackoverflow.com/questions/41203970/pull-image-azure-container-registry-kubernetes
+
+# Check if the internal services could be created properly 
+kubectl get svc -n internal-apps
+# Additionally, verify the public IP address of the nginx-controller and access the default nginx view using a preferred web browser by navigating to http://<public IP>.
 ```
 The Argo CD applications that has been registered and synchronized should resemble the following:
 
