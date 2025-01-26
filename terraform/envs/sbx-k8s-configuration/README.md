@@ -9,7 +9,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_k8s_external"></a> [k8s\_external](#module\_k8s\_external) | ../../modules/k8s-external | n/a |
+| <a name="module_k8s_external_helm"></a> [k8s\_external\_helm](#module\_k8s\_external\_helm) | ../../modules/k8s-external-helm | n/a |
 | <a name="module_k8s_internal"></a> [k8s\_internal](#module\_k8s\_internal) | ../../modules/k8s-internal | n/a |
 
 ## Resources
