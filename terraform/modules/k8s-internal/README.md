@@ -1,9 +1,7 @@
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.5.0 |
+No requirements.
 
 ## Modules
 

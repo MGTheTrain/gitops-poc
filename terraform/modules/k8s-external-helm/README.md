@@ -1,9 +1,7 @@
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.5.0 |
+No requirements.
 
 ## Modules
 
@@ -13,9 +11,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.argocd](https://registry.terraform.io/providers/helm/latest/docs/resources/release) | resource |
-| [helm_release.fluxcd](https://registry.terraform.io/providers/helm/latest/docs/resources/release) | resource |
-| [helm_release.nginx_ingress_controller](https://registry.terraform.io/providers/helm/latest/docs/resources/release) | resource |
+| [helm_release.argocd](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [helm_release.fluxcd](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [helm_release.nginx_ingress_controller](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [kubernetes_namespace.external_services](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 
 ## Inputs
