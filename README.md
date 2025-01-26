@@ -168,5 +168,5 @@ Registered [ArgoCD applications or FluxCD Kustomizations](./gitops/) of the `HEA
 ### Destroy the AKS cluster or uninstall helm charts
 
 0. **Optional:** Uninstall external helm charts of the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts)
-1. Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources)
+1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources)
 2. Destroy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-k8s-cluster)
