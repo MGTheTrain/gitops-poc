@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_az"></a> [az](#module\_az) | ../../modules/az | n/a |
+| <a name="module_az"></a> [az](#module\_az) | ../../../modules/az | n/a |
 
 ## Resources
 

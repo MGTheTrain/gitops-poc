@@ -9,7 +9,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_k8s_internal"></a> [k8s\_internal](#module\_k8s\_internal) | ../../modules/k8s-internal | n/a |
+| <a name="module_k8s_internal"></a> [k8s\_internal](#module\_k8s\_internal) | ../../../modules/k8s-internal | n/a |
 
 ## Resources
 
