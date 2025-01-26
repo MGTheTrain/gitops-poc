@@ -104,7 +104,7 @@ kubectl get svc -n internal-apps
 
 # If an error appears in the ArgoCD Web UI while pulling Docker images try manually deleting and then recreating the Docker secret
 kubectl delete secret acr-secret -n internal-apps
-kubectl create secret docker-registry acr-secret --docker-server=<> --docker-username=<> --docker-password=<> n gitops-ftw
+kubectl create secret docker-registry acr-secret --docker-server=<> --docker-username=<> --docker-password=<> -n internal-apps
 
 # Some relatable links to the issue:
 # - https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret#example-usage-docker-config
