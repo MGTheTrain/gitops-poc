@@ -1,5 +1,5 @@
-module "k8s_external" {
-  source      = "../../modules/k8s-external"
+module "k8s_external_helm" {
+  source      = "../../modules/k8s-external-helm"
   environment = var.environment
   gitops_tool = var.gitops_tool
   count       = var.selected_configuration == "external-helm" ? 1 : 0
