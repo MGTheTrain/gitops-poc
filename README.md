@@ -27,9 +27,9 @@ Github workflows will be utilized in [this](./.github/workflows/). Required secr
 
 ### Preconditions
 
-0. **Optional:** Create an ACR trough the [deploy-container-registry workflow](./.github/workflows/deploy-container-registry)
-1. **Optional:** Build and push a sample service with version tag to the ACR trough the [build-and-push-docker.yml workflow](./.github/workflows/build-and-push-docker.yml). 
-2. Deploy an Azure Storage Account Service including container for terraform backends trough the [deploy-tf-backend workflow](./.github/workflows/deploy-tf-backend)
+0. **Optional:** Create an ACR trough the [deploy-container-registry workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-container-registry.yml)
+1. **Optional:** Build and push a sample service with version tag to the ACR trough the [build-and-push-docker.yml workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/build-and-push-docker.yml). 
+2. Deploy an Azure Storage Account Service including containers persisting terraform state files trough the [deploy-tf-backend workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/deploy-tf-backend.yml)
 
 ### Deploy an AKS cluster, install ArgoCD or FluxCD helm charts or setup kubernetes resources for applications
 
