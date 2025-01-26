@@ -129,10 +129,14 @@ To obtain the external IP address of the Nginx controller's load balancer, run:
 
 ![load-balancer-ip.jpg](./images/load-balancer-ip.jpg)
 
-Checkout routes in a preferred browser:
+Checkout `nginx-app` route in a preferred browser
 
 ![nginx-app-route.jpg](./images/nginx-app-route.jpg)
+
+and `sample-service-app` route in a preferred browser
+
 ![sample-service-app-route.jpg](./images/sample-service-app-route.jpg)
+---
 
 ##### FluxCD Kustomizations
 
