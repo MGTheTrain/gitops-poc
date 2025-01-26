@@ -63,7 +63,7 @@ jobs:
           -backend-config="storage_account_name=gopoctbsbxsa001" \
           -backend-config="resource_group_name=gopoctb-sbx-rg001" \
           -backend-config="container_name=gopoctbsbxsac001" \
-          -backend-config="${{ inputs.ENVIRONMENT }}/k8s-internal/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/k8s-internal/terraform.tfstate"
         working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal
 
       - name: Deploy application k8s resources 
@@ -109,7 +109,7 @@ jobs:
           -backend-config="storage_account_name=gopoctbsbxsa001" \
           -backend-config="resource_group_name=gopoctb-sbx-rg001" \
           -backend-config="container_name=gopoctbsbxsac001" \
-          -backend-config="${{ inputs.ENVIRONMENT }}/k8s-internal/terraform.tfstate"
+          -backend-config="key=${{ inputs.ENVIRONMENT }}/k8s-internal/terraform.tfstate"
         working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/k8s-internal
 
       - name: Destroy application k8s resources
