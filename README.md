@@ -125,7 +125,14 @@ The Argo CD applications that has been registered and synchronized should resemb
 
 ![sample-service-argocd-app.jpg](./images/sample-service-argocd-app.jpg)
 
-The same applies for the internal `sample-service` helm chart
+To obtain the external IP address of the Nginx controller's load balancer, run:
+
+![load-balancer-ip.jpg](./images/load-balancer-ip.jpg)
+
+Checkout routes in a preferred browser:
+
+![nginx-app-route.jpg](./images/nginx-app-route.jpg)
+![sample-service-app-route.jpg](./images/sample-service-app-route.jpg)
 
 ##### FluxCD Kustomizations
 
