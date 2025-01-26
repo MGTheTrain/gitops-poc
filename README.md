@@ -186,7 +186,7 @@ kubectl get svc -n internal-apps
 
 Registered [ArgoCD applications or FluxCD Kustomizations](./gitops/) of the `HEAD of this repo's main branch` will be treated as the sole source of truth within the Kubernetes cluster, with the reconciliation loop ensuring that the desired state matches the cluster's actual state through Kubernetes controllers.
 
-### Destroy the AKS cluster or uninstall helm charts
+### Destroy the AKS cluster, uninstall helm charts or remove kubernetes resources for applications
 
 0. **Optional:** Uninstall external helm charts of the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts)
 1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources)
