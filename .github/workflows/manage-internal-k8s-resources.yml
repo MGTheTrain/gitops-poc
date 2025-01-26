@@ -50,10 +50,10 @@ jobs:
           -backend-config="container_name=gftfbesbxsac001" \
           -backend-config="key=${{ inputs.ENVIRONMENT }}-k8s-deployment/terraform.tfstate"
 
-          terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
-          mkdir -vp ~/.kube
-          head -n -3 ./config > ~/.kube/config
-          cat ~/.kube/config
+            terraform output aks_kube_config_list | awk '/^  apiVersion:/,/^  EOT,$/' | sed 's/^  //' > ./config
+            mkdir -vp ~/.kube
+            head -n -3 ./config > ~/.kube/config
+            cat ~/.kube/config
         working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}-k8s-deployment
 
       - name: Terraform Init # requires a Storage Account backend deployed trough storage-account-backend-deploy workflow step
@@ -74,7 +74,7 @@ jobs:
         env:
           TF_VAR_acr_username: "${{ inputs.ACR_USERNAME }}"
           TF_VAR_acr_password: "${{ inputs.ACR_PASSWORD }}"
-          TF_VAR_acr_login_server_name: "${{ inputs.ACR_LOGIN_SERVER_NAME }}"
+          TF_VAR_acr_login_server_name: "${{ inputs.ACR_LOGIN_SERVER }}"
           TF_VAR_selected_configuration: internal
 
   uninstall-helm-charts:
