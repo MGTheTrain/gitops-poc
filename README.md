@@ -59,7 +59,7 @@ and visit in a browser of choice `localhost:8080`. You would need to authenticat
 
 ![argocd-web-ui.PNG](./images/argocd-web-ui.PNG)
 
-The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n internal-apps -o jsonpath="{.data.password}" | base64 -d`
+The default username is `admin`. The default password can be obtained trough: `kubectl -n argocd get secret argocd-initial-admin-secret -n external-services -o jsonpath="{.data.password}" | base64 -d`
 
 ### Showcase GitOps
 

@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: nginx
-  namespace: internal-apps
+  namespace: external-services
 spec:
   interval: 5m
   url: https://github.com/MGTheTrain/gitops-poc.git
