@@ -93,6 +93,15 @@ argocd app create nginx \
   --revision main \
   --server localhost:8080
 
+# e.g. sample service
+argocd app create sample-service \
+  --repo https://github.com/MGTheTrain/gitops-poc.git \
+  --path gitops/argocd/sample-service \ 
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace internal-apps \
+  --revision main \
+  --server localhost:8080
+
 # In terminal process B - Sync Application
 argocd app sync nginx
 # In terminal process B - Monitor Application Status
@@ -110,11 +119,11 @@ kubectl create secret docker-registry acr-secret --docker-server=<> --docker-use
 # - https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret#example-usage-docker-config
 # - https://stackoverflow.com/questions/41203970/pull-image-azure-container-registry-kubernetes
 ```
-The Argo CD application that has been registered and synchronized should resemble the following:
+The Argo CD applications that has been registered and synchronized should resemble the following:
 
-![nginx-argocd-application.PNG](./images/nginx-argocd-application.PNG)
+![argocd-applications.jpg](./images/argocd-applications.jpg)
 
-![nginx-argocd-application-view-2.PNG](./images/nginx-argocd-application-view-2.PNG)
+![sample-service-argocd-app.jpg](./images/sample-service-argocd-app.jpg)
 
 The same applies for the internal `sample-service` helm chart
 
