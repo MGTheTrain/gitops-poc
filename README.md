@@ -24,6 +24,7 @@ Repository deploying an AKS cluster on demand, installing ArgoCD or Flux on thos
 Github workflows will be utilized in [this](./.github/workflows/). Required secrets need to be set therefore for this Github repository. Once the workflows described in the **Preconditions** and **Deploy an AKS cluster and install the ArgoCD or FluxCD helm charts** sections have been successfully executed, all resource groups listed should be visible in the Azure Portal UI:
 
 ![deployed-rgs.PNG](./images/deployed-rgs.PNG)
+![deployed-cloud-infra.PNG](./images/deployed-cloud-infra.PNG)
 
 ### Preconditions
 
