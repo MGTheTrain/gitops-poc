@@ -34,9 +34,9 @@ Github workflows will be utilized in [this](./.github/workflows/). Required secr
 
 ### Deploy an AKS cluster, install ArgoCD or FluxCD helm charts or setup kubernetes resources for applications
 
-0. Deploy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-k8s-cluster). 
-1. **Optional:** Install external helm charts into the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts)
-2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources)
+0. Deploy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-k8s-cluster.yml). 
+1. **Optional:** Install external helm charts into the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts.yml)
+2. **Optional:** Deploy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources.yml)
 
 **NOTE:** Set all the required Github secrets for aboves workflows
 
@@ -193,6 +193,6 @@ Registered [ArgoCD applications or FluxCD Kustomizations](./gitops/) will be tre
 
 ### Destroy the AKS cluster, uninstall helm charts or remove kubernetes resources for applications
 
-0. **Optional:** Uninstall external helm charts of the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts)
-1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources)
-2. Destroy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-k8s-cluster)
+0. **Optional:** Uninstall external helm charts of the deployed kubernetes cluster trough [manage-helm-charts workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-helm-charts.yml)
+1. **Optional:** Destroy kubernetes resources for application (secrets or reverse-proxy ingress) trough [manage-internal-k8s-resources workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-internal-k8s-resources.yml)
+2. Destroy an AKS trough the [manage-k8s-cluster workflow](https://github.com/MGTheTrain/gitops-poc/actions/workflows/manage-k8s-cluster.yml)
