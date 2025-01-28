@@ -14,12 +14,6 @@ on:
         default: sbx
         description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
 
-env:
-  ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
-  ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
-  ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
-  ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
-
 jobs:
 
   deploy-k8s:
