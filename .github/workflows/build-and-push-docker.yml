@@ -3,6 +3,11 @@ name: Build and push docker images to an ACR
 on:
   workflow_dispatch:
     inputs:
+      ENVIRONMENT:
+          type: choice
+          options: [ 'sbx' ]
+          default: sbx
+          description: 'Environment on which to deploy. Dev, qas, staging, prod environments not considered'
       DOCKER_IMAGE_TAG:
         required: true
         default: "0.1.0"
@@ -26,6 +31,7 @@ on:
 
 jobs:
   build-and-push-docker-image:
+    environment: ${{ inputs.ENVIRONMENT }}
     runs-on: ubuntu-latest
     steps:
 

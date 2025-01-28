@@ -23,6 +23,12 @@ env:
 jobs:
 
   deploy-k8s:
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
+      ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
+      ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
+      ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
     if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'deploy-k8s-service' }}
     runs-on: ubuntu-latest
     steps:
@@ -48,6 +54,12 @@ jobs:
         working-directory: ./terraform/envs/${{ inputs.ENVIRONMENT }}/cloud-infra
   
   destroy-k8s:
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
+      ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
+      ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
+      ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
     if: ${{ inputs.INFRASTRUCTURE_OPERATION == 'destroy-k8s-service' }}
     runs-on: ubuntu-latest
     steps:
