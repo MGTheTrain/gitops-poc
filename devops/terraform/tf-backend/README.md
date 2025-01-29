@@ -21,7 +21,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix. | `string` | `"gopoctb"` | no |
+| <a name="input_digital_product_affix"></a> [digital\_product\_affix](#input\_digital\_product\_affix) | The digital product affix. | `string` | `"mopoctb"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment. | `string` | `"sbx"` | no |
 | <a name="input_location"></a> [location](#input\_location) | The geographic location in which to deploy. | `string` | `"West Europe"` | no |
 | <a name="input_number_of_storage_accounts"></a> [number\_of\_storage\_accounts](#input\_number\_of\_storage\_accounts) | The total number of Azure Storage Accounts to deploy. | `number` | `1` | no |
