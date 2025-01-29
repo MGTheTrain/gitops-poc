@@ -8,7 +8,7 @@
 
 ## Summary
 
-Repository deploying an AKS cluster on demand, installing ArgoCD or Flux on those clusters enabling GitOps for custom helm charts
+Repository deploying an AKS cluster on demand, installing ArgoCD or Flux on those clusters enabling GitOps with Helm charts or Kustomization's
 
 ## Features
 
