@@ -1,6 +1,6 @@
 # Azure Rg
 variable "digital_product_affix" {
-  default     = "gopoctb"
+  default     = "mopoctb"
   description = "The digital product affix."
   type        = string
 }
