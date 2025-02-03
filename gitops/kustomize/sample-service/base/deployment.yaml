@@ -23,7 +23,7 @@ spec:
         - name: sample-service
           securityContext: {}
           image: "gopocacrsbxsa001.azurecr.io/sample-service:0.1.0"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: "Always"
           ports:
             - name: http
               containerPort: 80

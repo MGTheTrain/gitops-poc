@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Changed image pull policy to `Always`
+
 ## [0.3.0] - 28-01-2025
 
 ### Updated
